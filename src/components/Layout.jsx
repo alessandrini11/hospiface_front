@@ -45,7 +45,7 @@ const Layout = (props) => {
         <div className="col-span-6">
             <Header></Header>
             <Navigation></Navigation>
-            <main className="bg-[#dbe1f7]">
+            <main className="bg-[#dbe1f7] py-4">
               <Container>
                 {props.children}
               </Container>
