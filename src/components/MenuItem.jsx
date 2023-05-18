@@ -6,7 +6,7 @@ const MenuItem = ({title, links}) => {
     const [show, setShow] = useState(true)
     const icon = show ? <FontAwesomeIcon icon={faArrowRight} /> : <FontAwesomeIcon  icon={faArrowDown} />
     const nav_links = links.map((link, index) => (
-        <li key={index}><a href={link.url} className="">{link.name}</a></li>
+        <li className="py-1" key={index}><a href={link.url} className="font-extralight">{link.name}</a></li>
     ))
     return (
         <li className="py-1">
@@ -14,7 +14,7 @@ const MenuItem = ({title, links}) => {
             <span>{title}</span>
             {icon}
             </a>
-            <ul className={`bg-red-500 transition-all ease-in-out duration-700 overflow-y-hidden ${show ? 'h-0':'h-auto'}`}>
+            <ul style={{transition: 'all'}} className={`transition-all ease-in-out duration-700 overflow-y-hidden ${show ? 'h-0':'h-auto'}`}>
                 {nav_links}
             </ul>
         </li>

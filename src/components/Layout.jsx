@@ -7,7 +7,7 @@ import MenuItem from './MenuItem'
 const Layout = (props) => {
   return (
     <div className="grid grid-cols-7">
-        <div className="col-span-1">
+        <div className="col-span-1 shadow-md shadow-black">
             <div className="py-4 bg-teal-600 text-white">
                 <Container>
                   <div className="">
@@ -25,10 +25,10 @@ const Layout = (props) => {
                   <ul>
                     <MenuItem title="Patient" links={[{url: '/patiens/add', name: 'Add'}, {url: '/patiens/list', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Consultation" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Resultat Consult." links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Hospitalization" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Rooms" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
@@ -45,7 +45,7 @@ const Layout = (props) => {
         <div className="col-span-6">
             <Header></Header>
             <Navigation></Navigation>
-            <main className="bg-[#dbe1f7] py-4">
+            <main className="bg-[#dff0ff] py-10">
               <Container>
                 {props.children}
               </Container>
