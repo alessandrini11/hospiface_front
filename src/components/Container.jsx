@@ -2,7 +2,7 @@ import React from 'react'
 
 const Container = (props) => {
   return (
-    <div className="w-11/12 mx-auto">
+    <div style={{width: '95%'}} className="mx-auto">
         {props.children}
     </div>
   )

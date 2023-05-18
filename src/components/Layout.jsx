@@ -7,7 +7,7 @@ import MenuItem from './MenuItem'
 const Layout = (props) => {
   return (
     <div className="grid grid-cols-7">
-        <div className="col-span-1 shadow-md shadow-black">
+        <div style={{minHeight: '100vh'}} className="col-span-1 shadow-md shadow-black z-10">
             <div className="py-4 bg-teal-600 text-white">
                 <Container>
                   <div className="">
@@ -31,12 +31,6 @@ const Layout = (props) => {
                     <MenuItem title="Rooms" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
                   </ul>
                 </div>
               </div>
@@ -44,8 +38,8 @@ const Layout = (props) => {
         </div>
         <div className="col-span-6">
             <Header></Header>
-            <Navigation></Navigation>
-            <main className="bg-[#dff0ff] py-10">
+            <Navigation page={props.page} sub_page={props.sub_page}></Navigation>
+            <main className="bg-gray-100 py-10">
               <Container>
                 {props.children}
               </Container>

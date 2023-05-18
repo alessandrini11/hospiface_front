@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import Home from './pages/Home'
+import Index from './pages/patient'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <Home></Home>
+      <Index/>
     </>
   )
 }
