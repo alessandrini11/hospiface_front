@@ -7,7 +7,7 @@ import MenuItem from './MenuItem'
 const Layout = (props) => {
   return (
     <div className="grid grid-cols-7">
-        <div style={{minHeight: '100vh'}} className="col-span-1 shadow-md shadow-black z-10">
+        <div style={{minHeight: '100vh'}} className="hidden col-span-1 shadow-md shadow-black z-10">
             <div className="py-4 bg-teal-600 text-white">
                 <Container>
                   <div className="">

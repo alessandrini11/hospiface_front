@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import Index from './pages/patient'
+import New from "./pages/patient/New"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <Index/>
+      <New/>
     </>
   )
 }
