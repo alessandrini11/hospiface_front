@@ -1,11 +1,11 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react'
-import Layout from '../../components/Layout'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form';
+import Layout from '../../components/Layout';
+import Select from '../../components/Ui/Select';
+import SubmitButton from '../../components/Ui/SubmitButton';
 import * as yup from 'yup'
-import Input from '../../components/Ui/Input'
-import Select from '../../components/Ui/Select'
-import SubmitButton from '../../components/Ui/SubmitButton'
+import Input from '../../components/Ui/Input';
 
 const schema = yup.object({
     firstName: yup.string().required(),
@@ -13,7 +13,8 @@ const schema = yup.object({
     gender: yup.number(),
     password: yup.string().min(8).max(10)
 }).required()
-const New = () => {
+
+const Edit = () => {
     const { register, handleSubmit, formState:{ errors,  } } = useForm({
         resolver: yupResolver(schema)
       });
@@ -39,4 +40,4 @@ const New = () => {
     )
 }
 
-export default New
+export default Edit
