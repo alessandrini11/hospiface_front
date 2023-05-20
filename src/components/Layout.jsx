@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Navigation from './Navigation'
 import Container from './Container'
 import Icon from '../assets/react.svg'
 import MenuItem from './MenuItem'
+import MobileMenu from './MobileMenu'
 const Layout = (props) => {
+  const [open, setOpen] = useState(true)
+  const handleMobileMenu = () => {
+    setOpen(prevState => !prevState)
+  }
   return (
-    <div className="grid grid-cols-7">
-        <div style={{minHeight: '100vh'}} className="hidden col-span-1 shadow-md shadow-black z-10">
+    <div className="grid grid-cols-7 relative">
+        <MobileMenu icon={Icon} open={open} handleMobileMenu={handleMobileMenu} ></MobileMenu>
+        <div style={{minHeight: '100vh'}} className="hidden lg:block col-span-1 shadow-md shadow-black z-10">
             <div className="py-4 bg-teal-600 text-white">
                 <Container>
                   <div className="">
@@ -36,8 +42,8 @@ const Layout = (props) => {
               </div>
             </div>
         </div>
-        <div className="col-span-6">
-            <Header></Header>
+        <div className="col-span-7 lg:col-span-6">
+            <Header handleMobileMenu={handleMobileMenu} ></Header>
             <Navigation page={props.page} sub_page={props.sub_page}></Navigation>
             <main className="bg-gray-100 py-10">
               <Container>
