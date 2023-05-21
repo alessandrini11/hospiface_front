@@ -1,49 +1,57 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import CardContainer from '../../components/Cards/CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons'
 import Table from '../../components/Table'
 import SearchForm from '../../components/SearchForm'
-import {faker} from '@faker-js/faker'
-export default class index extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            table_head: [],
-            entity: [],
-            pagination: {},
-            loading: true
+import Alert from '../../components/Alert'
+import axios from 'axios'
+import { patient_table_head } from '../../utils/constants'
+import { useParams, useSearchParams } from 'react-router-dom'
+import Spinner from '../../components/Ui/Spinner'
+
+const index = () => {
+    const [search_params, set_search_params] = useSearchParams()
+    const [page, set_page] = useState(search_params.get('page'))
+    const [query, setQuery] = useState(search_params.get('query'))
+    const [table_head, set_table_head] = useState([])
+    const [entity, set_entity] = useState(null)
+    const [pagination, set_pagination] = useState({})
+    const [loading, set_loading] = useState(true)
+    const [created_message, set_created_message] = useState(null)
+    const [error_message, set_error_message] = useState(null)
+    useEffect(() => {
+        axios.get(`/patients?actualPage=${page || 1}&query=${query || ''}`)
+            .then(response => {
+                set_entity(response.data.data.data)
+                set_table_head(patient_table_head)
+                set_pagination({
+                    actual_Page: response.data.data.page,
+                    total_Page: response.data.data.totalPages
+                })
+            })
+            .catch(error => {
+                set_error_message(error.message)
+            })
+        set_loading(false)
+        if(localStorage.getItem('patient')){
+            set_created_message(localStorage.getItem('patient'))
         }
+    }, [page, query])
+    const handleSearch = () => {
+        
     }
-    componentDidMount(){
-        const table_head = ['full name', 'sexe', 'blood group', 'telephone', 'email', 'address', 'action']
-        const entity = table_head.map(() => (
-            {
-                fullName: faker.person.fullName({sex: 'male'}),
-                gender: faker.person.sex(),
-                blood_group: faker.word.sample({length: 2}),
-                telephone: faker.phone.number(),
-                email: faker.internet.email({allowSpecialCharacters: false}),
-                adress: faker.person.jobTitle()
-            }
-        ))
-        const pagination = {actual_Page: 3, total_Page: 10}
-        this.setState({
-            pagination,
-            entity,
-            table_head,
-            loading: false
-        })
-    }
-    render() {
-        const data = this.state.loading ? 
-        <div className="">
-            Loading
-        </div> : 
-        <Table table_head={this.state.table_head} entities={this.state.entity} pagination={this.state.pagination}/>
-        return (
+    const data = !entity ? 
+    <div className="flex justify-center">
+        <Spinner></Spinner>
+    </div> : 
+    <Table table_head={table_head} entities={entity} pagination={pagination}/>
+    
+    return (
         <Layout page="Patient" sub_page="index">
+            { created_message && <Alert type="toast" icon="success" message={created_message} ></Alert>}
+            { error_message && <Alert type="modal" icon="error" title={error_message} ></Alert>}
             <CardContainer>
                 <div className="">
                     <div className="flex justify-between items-center py-4">
@@ -58,6 +66,7 @@ export default class index extends Component {
                 </div>
             </CardContainer>
         </Layout>
-        )
-    }
+    )
 }
+
+export default index

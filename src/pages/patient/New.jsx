@@ -3,15 +3,19 @@ import Layout from '../../components/Layout'
 import Input from '../../components/Ui/Input'
 import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
-import { blood_groups, patient_status, sexs } from '../../utils/constants'
+import { blood_groups, patient_status, sexs, messages } from '../../utils/constants'
 import axios from 'axios'
 import Patient from '../../model/Patient.model'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Alert from '../../components/Alert'
+import { redirect } from 'react-router-dom'
 const New = () => {
-    const { register, handleSubmit, control, formState:{ errors,  } } = useForm({
+    const { register, handleSubmit, control, formState:{ errors } } = useForm({
         resolver: yupResolver(Patient)
     });
+    const [errorMessage, setErrorMessage] = useState('')
+    const [isError, setIsError] = useState(false)
     const [sumbiting, setSubmiting] = useState(false)
     const [patientStatus, setPatientStatus] = useState('')
     const [patientSex, setPatientSex] = useState('')
@@ -30,12 +34,21 @@ const New = () => {
         const body = {...data, sex: patientSex, bloodGroup: patientBloodGroup, status: patientStatus}
         axios.post('/patients', body)
             .then(response => {
-                console.log(response)
+                if(response.status === 201){
+                    localStorage.setItem('patient', messages.created)
+                    redirect('/patients')
+                }
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                setSubmiting(false)
+                setErrorMessage(error.message)
+                setIsError(true)
+            })
     }
     return (
         <Layout page="patient" sub_page="add">
+            { isError && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
                     <Input input_label="nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
@@ -51,12 +64,12 @@ const New = () => {
                         rules={{ required: true }}
                         render={({ field: { onChange, value, name, ref } }) => (
                             <ReactSelect
-                            value={sexs.find((c) => c.value === value)}
-                            onChange={handlePatientSex}
-                            options={sexs}
-                            ref={ref}
-                            name={name}
-                        />
+                                value={sexs.find((c) => c.value === value)}
+                                onChange={handlePatientSex}
+                                options={sexs}
+                                ref={ref}
+                                name={name}
+                            />
                         )}
                     />
                 </div>

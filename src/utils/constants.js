@@ -12,5 +12,9 @@ export const patient_status = [
     {value: 1, label: "mort"},
     {value: 2, label: "hostpitalisé"},
 ]
-
 export const sexs = [{ value: 'man', label: 'homme' },{ value: 'woman', label: 'femme' }]
+export const messages = {
+    created: 'created successfully'
+}
+
+export const patient_table_head = ['full name', 'sexe', 'blood group', 'telephone', 'email', 'address', 'personne urgence', 'numéro urgence', 'statut', 'créé le', 'créé par', , 'mise à jour le', , 'mise à jour par', 'action']

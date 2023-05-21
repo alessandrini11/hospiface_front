@@ -20,26 +20,52 @@ const Table = ({table_head, entities, pagination}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {entities.map((entity, index) => (
+                    { entities.length === 0 ?
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td colSpan="2" className="px-6 py-4">Aucun enregistrement</td>
+                    </tr> :
+                    entities.map((entity, index) => (
                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td className="px-3 py-2">{index + 1}</td>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {entity.fullName}
+                            {entity.first_name + ' ' + entity.last_name}
                         </th>
                         <td className="px-6 py-4">
-                            {entity.gender}
+                            {entity.sex}
                         </td>
                         <td className="px-6 py-4">
                             {entity.blood_group}
                         </td>
                         <td className="px-6 py-4">
-                            {entity.telephone}
+                            {entity.phone_number}
                         </td>
                         <td className="px-6 py-4">
                             {entity.email}
                         </td>
                         <td className="px-6 py-4">
                             {entity.adress}
+                        </td>
+                        <td className="px-6 py-4">
+                            {entity.emergency_person}
+                        </td>
+                        <td className="px-6 py-4">
+                            {entity.emergency_contact}
+                        </td>
+                        <td className="px-6 py-4">
+                            {/* {patient_status.filter(status => status.value === entity.status)}s */}
+                            {entity.emergency_contact}
+                        </td>
+                        <td className="px-6 py-4">
+                            {`${(new Date(entity.createdAt)).getDate()}/${(new Date(entity.createdAt)).getMonth() + 1}/${(new Date(entity.createdAt)).getFullYear()}`}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.createdBy && entity.createdBy.firstname + ' ' +entity.createdBy.lastname}
+                        </td>
+                        <td className="px-6 py-4">
+                            { entity.updatedAt && `${(new Date(entity.updatebyAt)).getDate()}/${(new Date(entity.updatebyAt)).getMonth() + 1}/${(new Date(entity.updatebyAt)).getFullYear()}`}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.updatedBy && entity.updatedBy.firstname + ' ' +entity.updatedBy.lastname}
                         </td>
                         <td className="px-6 py-4">
                             <div className="flex gap-3">
@@ -65,4 +91,4 @@ const Table = ({table_head, entities, pagination}) => {
     )
 }
 
-export default Table
+export default React.memo(Table)
