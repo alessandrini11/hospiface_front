@@ -1,13 +1,13 @@
 import React from 'react'
 import { redirect } from 'react-router-dom'
 
-const Pagination = ({actual_page, total_page}) => {
+const Pagination = ({actual_page, total_page, page}) => {
     const links = []
     for (let index = 1; index <= total_page; index++) {
         const active_link = 'z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700'
         const non_active_link = 'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700'
         links.push(<li key={index}>
-            <a href={`/patients?page=${index}`} className={actual_page === index ? active_link: non_active_link}>{index}</a>
+            <a href={`/${page}?page=${index}`} className={actual_page === index ? active_link: non_active_link}>{index}</a>
         </li>)
     }
   return (

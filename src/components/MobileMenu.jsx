@@ -6,7 +6,7 @@ import { faCross, faX } from '@fortawesome/free-solid-svg-icons'
 
 const MobileMenu = ({handleMobileMenu, open, icon}) => {
     return (
-        <div className={`lg:hidden absolute z-0 top-0 w-full ${ open && '-translate-x-full'} transform transition-all duration-300 bg-black/75`}>
+        <div className={`lg:hidden absolute z-10 top-0 w-full ${ open && '-translate-x-full'} transform transition-all duration-300 bg-black/75`}>
             <div style={{minHeight: '100vh'}} className="w-1/2 shadow-md shadow-black bg-white z-10">
                 <div className="py-4 bg-teal-600 text-white">
                     <Container>
@@ -24,14 +24,14 @@ const MobileMenu = ({handleMobileMenu, open, icon}) => {
                     <div>
                     <a href="/" className="">Dashboard</a>
                     <ul>
-                        <MenuItem title="Patient" links={[{url: '/patiens/add', name: 'Add'}, {url: '/patiens/list', name: 'List'}]} />
-                        <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Consultation" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Resultat Consult." links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Hospitalization" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Rooms" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Patient" links={[{url: '/patients/new', name: 'new'}, {url: '/patients/list', name: 'List'}]} />
+                        <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Consultation" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Resultat Consult." links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Hospitalization" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Rooms" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                        <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
                     </ul>
                     </div>
                 </div>

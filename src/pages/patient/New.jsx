@@ -9,7 +9,7 @@ import Patient from '../../model/Patient.model'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Alert from '../../components/Alert'
-import { redirect } from 'react-router-dom'
+import { Outlet, redirect } from 'react-router-dom'
 const New = () => {
     const { register, handleSubmit, control, formState:{ errors } } = useForm({
         resolver: yupResolver(Patient)
@@ -40,7 +40,6 @@ const New = () => {
                 }
             })
             .catch(error => {
-                console.log(error)
                 setSubmiting(false)
                 setErrorMessage(error.message)
                 setIsError(true)
@@ -48,6 +47,7 @@ const New = () => {
     }
     return (
         <Layout page="patient" sub_page="add">
+            <Outlet></Outlet>
             { isError && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">

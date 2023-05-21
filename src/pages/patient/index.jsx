@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import CardContainer from '../../components/Cards/CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,8 +7,8 @@ import Table from '../../components/Table'
 import SearchForm from '../../components/SearchForm'
 import Alert from '../../components/Alert'
 import axios from 'axios'
-import { patient_table_head } from '../../utils/constants'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { patient_columns } from '../../utils/constants'
+import { Link, useSearchParams } from 'react-router-dom'
 import Spinner from '../../components/Ui/Spinner'
 
 const index = () => {
@@ -25,7 +25,6 @@ const index = () => {
         axios.get(`/patients?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
                 set_entity(response.data.data.data)
-                set_table_head(patient_table_head)
                 set_pagination({
                     actual_Page: response.data.data.page,
                     total_Page: response.data.data.totalPages
@@ -38,15 +37,15 @@ const index = () => {
         if(localStorage.getItem('patient')){
             set_created_message(localStorage.getItem('patient'))
         }
+        return () => {
+            localStorage.removeItem('patient')
+        }
     }, [page, query])
-    const handleSearch = () => {
-        
-    }
     const data = !entity ? 
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> : 
-    <Table table_head={table_head} entities={entity} pagination={pagination}/>
+    <Table page="patients" columns={patient_columns} entities={entity} pagination={pagination}/>
     
     return (
         <Layout page="Patient" sub_page="index">
@@ -59,7 +58,7 @@ const index = () => {
                             <SearchForm/>
                         </div>
                         <p className="">
-                            <a href="" className="inline-block text-green-700 bg-green-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Ajouter <FontAwesomeIcon icon={faPlus}/></a>
+                            <Link to="/" className="inline-block text-green-700 bg-green-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Ajouter <FontAwesomeIcon icon={faPlus}/></Link>
                         </p>
                     </div>
                     {data}

@@ -1,4 +1,5 @@
 import {
+  Outlet,
     createBrowserRouter,
   } from "react-router-dom";
 import Home from './pages/Home'
@@ -13,21 +14,11 @@ import PatientEdit from './pages/patient/Edit'
     },
     {
       path: "/patients",
-      element: <PatientIndex />,
-      children: [
-        {
-          path: "add",
-          element: <PatientNew />
-        },
-        {
-          path: "edit/:patientId",
-          element: <PatientEdit />
-        },
-        {
-          path: "show/:patientId",
-          element: <PatientEdit />
-        }
-      ]
+      element: <PatientIndex></PatientIndex>
+    },
+    {
+      path: "/patients/edit/:patientId",
+      element: <PatientEdit />,
     }
   ]); 
 export default Router

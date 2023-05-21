@@ -29,14 +29,14 @@ const Layout = ({page, sub_page, children}) => {
                 <div>
                   <a href="/" className="">Dashboard</a>
                   <ul>
-                    <MenuItem title="Patient" links={[{url: '/patiens/add', name: 'Add'}, {url: '/patiens/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Consultation" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Resultat Consult." links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Hospitalization" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Rooms" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
-                    <MenuItem title="Personnel" links={[{url: '/personnel/add', name: 'Add'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Patient" links={[{url: '/patients/new', name: 'new'}, {url: '/patient/index', name: 'List'}]} />
+                    <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Consultation" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Resultat Consult." links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Hospitalization" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Rooms" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
                   </ul>
                 </div>
               </div>
