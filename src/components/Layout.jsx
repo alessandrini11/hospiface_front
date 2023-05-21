@@ -5,7 +5,7 @@ import Container from './Container'
 import Icon from '../assets/react.svg'
 import MenuItem from './MenuItem'
 import MobileMenu from './MobileMenu'
-const Layout = (props) => {
+const Layout = ({page, sub_page, children}) => {
   const [open, setOpen] = useState(true)
   const handleMobileMenu = () => {
     setOpen(prevState => !prevState)
@@ -44,10 +44,10 @@ const Layout = (props) => {
         </div>
         <div className="col-span-7 lg:col-span-6">
             <Header handleMobileMenu={handleMobileMenu} ></Header>
-            <Navigation page={props.page} sub_page={props.sub_page}></Navigation>
+            <Navigation page={page} sub_page={sub_page}></Navigation>
             <main className="bg-gray-100 py-10">
               <Container>
-                {props.children}
+                {children}
               </Container>
             </main>
         </div>

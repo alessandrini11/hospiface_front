@@ -1,39 +1,117 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import Input from '../../components/Ui/Input'
-import Select from '../../components/Ui/Select'
+import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
-
-const schema = yup.object({
-    firstName: yup.string().required(),
-    lastName: yup.string().min(5).required(),
-    gender: yup.number(),
-    password: yup.string().min(8).max(10)
-}).required()
+import { blood_groups, patient_status, sexs } from '../../utils/constants'
+import axios from 'axios'
+import Patient from '../../model/Patient.model'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 const New = () => {
-    const { register, handleSubmit, formState:{ errors,  } } = useForm({
-        resolver: yupResolver(schema)
-      });
-    const onSubmit = data => console.log(data) 
+    const { register, handleSubmit, control, formState:{ errors,  } } = useForm({
+        resolver: yupResolver(Patient)
+    });
+    const [sumbiting, setSubmiting] = useState(false)
+    const [patientStatus, setPatientStatus] = useState('')
+    const [patientSex, setPatientSex] = useState('')
+    const [patientBloodGroup, setPatientBloodGroup] = useState('')
+    const handlePatientStatus = (newValue) => {
+        setPatientStatus(newValue.value);
+    };
+    const handlePatientBloodGroup = (newValue) => {
+        setPatientBloodGroup(newValue.value);
+    };
+    const handlePatientSex = (newValue) => {
+        setPatientSex(newValue.value);
+    };
+    const onSubmit = data => {
+        setSubmiting(true)
+        const body = {...data, sex: patientSex, bloodGroup: patientBloodGroup, status: patientStatus}
+        axios.post('/patients', body)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => console.log(error))
+    }
     return (
-        <Layout>
+        <Layout page="patient" sub_page="add">
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
-                    <Input input_label="first name" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
+                    <Input input_label="nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
                 </div>
                 <div className="">
-                    <Input input_label="last name" input_name="lastName" input_type="text" register={register} error_field={errors.lastName?.message} />
+                    <Input input_label="prenom" input_name="lastName" input_type="text" register={register} error_field={errors.lastName?.message} />
                 </div>
                 <div className="">
-                    <Select options={[{ value: 1, label: 'male' },{ value: 2, label: 'female' }]} input_label="gender" input_name="gender"/>
+                <label htmlFor="sex" className="block mb-2 text-sm font-medium text-gray-900">Sexe</label>
+                    <Controller
+                        name="sex"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field: { onChange, value, name, ref } }) => (
+                            <ReactSelect
+                            value={sexs.find((c) => c.value === value)}
+                            onChange={handlePatientSex}
+                            options={sexs}
+                            ref={ref}
+                            name={name}
+                        />
+                        )}
+                    />
                 </div>
                 <div className="">
-                    <Input input_label="password" input_name="password" input_type="password" register={register} error_field={errors.password?.message}/>
+                    <Input input_label="date de naissance" input_name="birthDate" input_type="date" register={register} error_field={errors.birthDate?.message} />
                 </div>
-                <SubmitButton label="submit"/>
+                <div className="">
+                <label htmlFor="bloodGroup" className="block mb-2 text-sm font-medium text-gray-900">Groupe Sanguain</label>
+                    <Controller
+                            name="bloodGroup"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { onChange, value, name, ref } }) => (
+                                <ReactSelect
+                                value={blood_groups.find((c) => c.value === value)}
+                                onChange={handlePatientBloodGroup}
+                                options={blood_groups}
+                                ref={ref}
+                                name={name}
+                            />
+                            )}
+                    />
+                </div>
+                <div className="">
+                    <Input input_label="email" input_name="email" input_type="email" register={register} error_field={errors.email?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="numéro téléphone" input_name="phoneNumber" input_type="tel" register={register} error_field={errors.phoneNumber?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="personne à contacter en cas d'urgence" input_name="emergencyPerson" input_type="text" register={register} error_field={errors.emergencyPerson?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="numéro de la personne à contacter" input_name="emergencyContact" input_type="tel" register={register} error_field={errors.emergencyContact?.message} />
+                </div>
+                <div className="">
+                <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status</label>
+                    <Controller
+                        name="status"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field: { onChange, value, name, ref } }) => (
+                            <ReactSelect
+                            value={patient_status.find((c) => c.value === value)}
+                            onChange={handlePatientStatus}
+                            options={patient_status}
+                            ref={ref}
+                            name={name}
+                        />
+                        )}
+                    />
+                </div>
+                <div className="">
+                    <SubmitButton submiting={sumbiting} label="enregistrer"/>
+                </div>
             </form>
         </Layout>
     )

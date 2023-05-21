@@ -20,7 +20,7 @@ const Edit = () => {
       });
     const onSubmit = data => console.log(data) 
     return (
-        <Layout>
+        <Layout page="Patient" sub_page="add" >
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
                     <Input input_label="first name" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
