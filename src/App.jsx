@@ -1,14 +1,20 @@
-import Edit from "./pages/patient/Edit"
-import New from "./pages/patient/New"
-import Index from "./pages/patient/index"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-function App() {
+import Home from "./pages/Home"
+import Layout from "./components/Layout"
+import PatientsRoutes from "./routes/patients.routes"
 
-  return (
-    <>
-      <Index/>
-    </>
-  )
+const App = () => {
+	return (
+		<BrowserRouter>
+			<Layout>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="patients/*" element={<PatientsRoutes />} />
+				</Routes>
+			</Layout>
+		</BrowserRouter>
+	)
 }
 
 export default App
