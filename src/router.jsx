@@ -17,7 +17,15 @@ import PatientEdit from './pages/patient/Edit'
       element: <PatientIndex></PatientIndex>
     },
     {
+      path: "/patients/new",
+      element: <PatientNew />,
+    },
+    {
       path: "/patients/edit/:patientId",
+      element: <PatientEdit />,
+    },
+    {
+      path: "/patients/show/:patientId",
       element: <PatientEdit />,
     }
   ]); 

@@ -3,8 +3,9 @@ import Pagination from './Pagination'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { patient_status } from '../utils/constants'
+import { Link } from 'react-router-dom'
 
-const Table = ({columns, entities, pagination, page}) => {
+const Table = ({columns, entities, pagination, page, handle_click}) => {
     return (
         <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -17,7 +18,6 @@ const Table = ({columns, entities, pagination, page}) => {
                             </th>
                         ))
                         }
-                        <th className="px-6 py-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,7 @@ const Table = ({columns, entities, pagination, page}) => {
                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td className="px-3 py-2">{index + 1}</td>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {entity.firstName + ' ' + entity.last_name}
+                            {entity.firstName + ' ' + entity.lastName}
                         </th>
                         <td className="px-6 py-4 whitespace-nowrap">
                             {entity.sex}
@@ -72,13 +72,13 @@ const Table = ({columns, entities, pagination, page}) => {
                         </td>
                         <td className="px-6 py-4">
                             <div className="flex gap-3">
-                                <a href="#" className="transition-all hover:scale-150">
+                                <Link to={`/patients/show/${entity.id}`} className="transition-all hover:scale-150">
                                     <FontAwesomeIcon icon={faEye}/>
-                                </a>
-                                <a href="#" className="transition-all hover:scale-150">
+                                </Link>
+                                <Link to={`/patients/edit/${entity.id}`} className="transition-all hover:scale-150">
                                     <FontAwesomeIcon icon={faPencil}/>
-                                </a>
-                                <a href="#" className="transition-all hover:scale-150">
+                                </Link>
+                                <a onClick={() => handle_click(entity.id)} className="transition-all hover:scale-150">
                                     <FontAwesomeIcon icon={faTrash}/>
                                 </a>
                             </div>

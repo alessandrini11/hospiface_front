@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import Layout from '../../components/Layout'
-import Input from '../../components/Ui/Input'
+import Layout from '../components/Layout'
+import Input from '../components/Ui/Input'
 import ReactSelect from 'react-select'
-import SubmitButton from '../../components/Ui/SubmitButton'
-import { blood_groups, patient_status, sexs, messages } from '../../utils/constants'
+import SubmitButton from '../components/Ui/SubmitButton'
+import { blood_groups, patient_status, sexs, messages } from '../utils/constants'
 import axios from 'axios'
-import Patient from '../../model/Patient.model'
+import Patient from '../model/Patient.model'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Alert from '../../components/Alert'
+import Alert from '../components/Alert'
 import { Outlet, useNavigate } from 'react-router-dom'
-const New = () => {
+const NewPage = () => {
     const { register, handleSubmit, control, formState:{ errors } } = useForm({
         resolver: yupResolver(Patient)
     });
@@ -114,8 +114,9 @@ const New = () => {
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>
+            <Outlet></Outlet>
         </Layout>
     )
 }
 
-export default New
+export default NewPage
