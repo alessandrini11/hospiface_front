@@ -6,10 +6,10 @@ import PatientIndex from "../pages/patient/index"
 
 const PatientsRoutes = () => {
 	return (
-		<Routes path="/" element={<PatientIndex />}>
+		<Routes>
+			<Route path="/" element={<PatientIndex />} />
 			<Route path="new" element={<PatientNew />} />
 			<Route path=":ID/edit" element={<PatientEdit />} />
-			<Route path="new" element={<PatientNew />} />
 		</Routes>
 	)
 }
