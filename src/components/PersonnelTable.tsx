@@ -1,14 +1,25 @@
 import React from 'react'
+import { PersonnelType } from '../entityPropsType'
 import Pagination from './Pagination'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { patient_status } from '../utils/constants'
 import { Link } from 'react-router-dom'
+import { personnel_status } from '../utils/constants'
+type Props = {
+  columns: Array<string>,
+  entities: PersonnelType[],
+  page: string | null,
+  pagination: {
+    actual_Page: number,
+    total_Page: number
+  } | null,
+  handle_click: (id: number) => void
+}
 
-const Table = ({columns, entities, pagination, page, handle_click}) => {
-    return (
-        <div className="relative overflow-x-auto">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+function PersonnelTable({columns, entities, page, pagination, handle_click}: Props) {
+  return (
+    <div className="relative overflow-x-auto">
+      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-6 py-3">Number</th>
@@ -23,68 +34,71 @@ const Table = ({columns, entities, pagination, page, handle_click}) => {
                 <tbody>
                     { entities.length === 0 ?
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td colSpan="2" className="px-6 py-4">Aucun enregistrement</td>
+                        <td colSpan={2} className="px-6 py-4">Aucun enregistrement</td>
                     </tr> :
                     entities.map((entity, index) => (
                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td className="px-3 py-2">{index + 1}</td>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {entity.firstName + ' ' + entity.lastName}
+                            { entity.title + ' ' + entity.firstName + ' ' + entity.lastName}
                         </th>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.type}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.subType}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.positionHeld}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.speciality.name}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             {entity.sex}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             {entity.bloodGroup}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4">
                             {entity.phoneNumber}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center">
                             {entity.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.adress}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.emergencyPerson}
+                        <td className="px-6 py-4 text-center">
+                            {entity.address}
                         </td>
                         <td className="px-6 py-4">
-                            {entity.emergencyContact}
-                        </td>
-                        <td className="px-6 py-4">
-                            {patient_status.filter(status => (
-                                status.value === entity
+                            {personnel_status.filter(status => (
+                                status.value === entity.status
                             )).map(status => (status.label))
                             }
                         </td>
                         <td className="px-6 py-4 text-center">
-                            {entity.consultations.length}
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                            {entity.hospitalizations.length}
+                            {entity.consultations}
                         </td>
                         <td className="px-6 py-4">
-                            {`${(new Date(entity.createdAt)).getDate()}/${(new Date(entity.createdAt)).getMonth() + 1}/${(new Date(entity.createdAt)).getFullYear()}`}
+                            {`${(new Date(entity.created_at)).getDate()}/${(new Date(entity.created_at)).getMonth() + 1}/${(new Date(entity.created_at)).getFullYear()}`}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.createdBy && entity.createdBy.firstname + ' ' +entity.createdBy.lastname}
+                            {entity.created_by && entity.created_by.firstname + ' ' +entity.created_by.lastname}
                         </td>
                         <td className="px-6 py-4">
-                            { entity.updatedAt && `${(new Date(entity.updatedAt)).getDate()}/${(new Date(entity.updatedAt)).getMonth() + 1}/${(new Date(entity.updatedAt)).getFullYear()}`}
+                            { entity.updated_at && `${(new Date(entity.updated_at)).getDate()}/${(new Date(entity.updated_at)).getMonth() + 1}/${(new Date(entity.updated_at)).getFullYear()}`}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.updatedBy && entity.updatedBy.firstname + ' ' +entity.updatedBy.lastname}
+                            {entity.updated_by && entity.updated_by.firstname + ' ' +entity.updated_by.lastname}
                         </td>
                         <td className="px-6 py-4">
                             <div className="flex gap-3">
-                                <Link to={`/patients/show/${entity.id}`} className="transition-all hover:scale-150 cursor-pointer">
+                                <Link to={`/patients/show/${entity.id}`} className="transition-all hover:scale-150">
                                     <FontAwesomeIcon icon={faEye}/>
                                 </Link>
-                                <Link to={`/patients/edit/${entity.id}`} className="transition-all hover:scale-150 cursor-pointer">
+                                <Link to={`/patients/edit/${entity.id}`} className="transition-all hover:scale-150">
                                     <FontAwesomeIcon icon={faPencil}/>
                                 </Link>
-                                <a onClick={() => handle_click(entity.id)} className="transition-all hover:scale-150 cursor-pointer">
+                                <a onClick={() => handle_click(entity.id)} className="transition-all hover:scale-150">
                                     <FontAwesomeIcon icon={faTrash}/>
                                 </a>
                             </div>
@@ -94,10 +108,10 @@ const Table = ({columns, entities, pagination, page, handle_click}) => {
                 </tbody>
             </table>
             <div className="py-4">
-                <Pagination page={page} actual_page={pagination.actual_Page} total_page={pagination.total_Page}/>
+                <Pagination page={page} actual_page={pagination?.actual_Page} total_page={pagination?.total_Page}/>
             </div>
-        </div>
-    )
+    </div>
+  )
 }
 
-export default React.memo(Table)
+export default PersonnelTable

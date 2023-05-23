@@ -5,6 +5,7 @@ import Container from './Container'
 import Icon from '../assets/react.svg'
 import MenuItem from './MenuItem'
 import MobileMenu from './MobileMenu'
+import { Link } from 'react-router-dom'
 const Layout = ({page, sub_page, children}) => {
   const [open, setOpen] = useState(true)
   const handleMobileMenu = () => {
@@ -27,7 +28,7 @@ const Layout = ({page, sub_page, children}) => {
             <div className="py-2">
               <div className="w-10/12 mx-auto">
                 <div>
-                  <a href="/" className="">Dashboard</a>
+                  <Link to="/" className="">Dashboard</Link>
                   <ul>
                     <MenuItem title="Patient" links={[{url: '/patients/new', name: 'New'}, {url: '/patients', name: 'List'}]} />
                     <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />

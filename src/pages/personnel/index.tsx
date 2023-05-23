@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
-import CardContainer from '../../components/Cards/CardContainer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons'
-import Table from '../../components/Table'
-import SearchForm from '../../components/SearchForm'
 import Alert from '../../components/Alert'
-import axios from 'axios'
-import { patient_columns } from '../../utils/constants'
-import { Link, useSearchParams } from 'react-router-dom'
+import CardContainer from '../../components/Cards/CardContainer'
+import SearchForm from '../../components/SearchForm'
+import AddButton from '../../components/Ui/AddButton'
+import {Pagination, PersonnelType} from '../../entityPropsType/index'
+import PersonnelTable from '../../components/PersonnelTable'
 import Spinner from '../../components/Ui/Spinner'
+import { personnel_columns } from '../../utils/constants'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import axios from 'axios'
 import Swal from 'sweetalert2'
-import {useNavigate} from 'react-router-dom'
-
-const index = () => {
+type Props = {}
+const index = (props: Props) => {
     const [search_params, set_search_params] = useSearchParams()
-    const [page, set_page] = useState(search_params.get('page'))
-    const [query, setQuery] = useState(search_params.get('query'))
-    const [entity, set_entity] = useState(null)
-    const [pagination, set_pagination] = useState({})
-    const [loading, set_loading] = useState(true)
-    const [created_message, set_created_message] = useState(null)
+    const [created_message, set_created_message] = useState<string | null>(null)
     const [error_message, set_error_message] = useState(null)
+    const [pagination, set_pagination] = useState<Pagination | null>(null)
+    const [personnel, set_personnel] = useState<PersonnelType[] | null>(null)
+    const [page, set_page] = useState<string | null>(search_params.get('page'))
+    const [query, setQuery] = useState(search_params.get('query'))
     const [confirm_delete, set_confirm_delete] = useState(false)
     const navigate = useNavigate()
+
     useEffect(() => {
-        axios.get(`/patients?actualPage=${page || 1}&query=${query || ''}`)
+        axios.get(`/personnels?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
-                set_entity(response.data.data.data)
+                set_personnel(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,
                     total_Page: response.data.data.totalPages
@@ -36,16 +35,15 @@ const index = () => {
             .catch(error => {
                 set_error_message(error.message)
             })
-        set_loading(false)
-        if(localStorage.getItem('patient')){
-            set_created_message(localStorage.getItem('patient'))
+        if(localStorage.getItem('personnel')){
+            set_created_message(localStorage.getItem('personnel'))
         }
         return () => {
-            localStorage.removeItem('patient')
+            localStorage.removeItem('personnel')
         }
     }, [page, query])
 
-    const handleDelete = (id) => {
+    const handle_click = (id: number): void => {
         Swal.fire({
             title: 'Voulez vous supprimer ?',
             showCancelButton: true,
@@ -61,12 +59,11 @@ const index = () => {
                         Swal.fire({
                             title: 'success',
                             icon: 'success',
-                            isDismissed: false,
                             confirmButtonText: 'Ok'
                         })
                         .then(result => {
                             if(result.isConfirmed){
-                                window.location.href = "/patients"
+                                window.location.href = "/personnels"
                             }
                         })
                     })
@@ -76,32 +73,34 @@ const index = () => {
             } else if (result.isDismissed || result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info')
             }
-          })
+        })
     }
-    const data = !entity ? 
+    const data = !personnel ?
     <div className="flex justify-center">
         <Spinner></Spinner>
-    </div> : 
-    <Table handle_click={handleDelete} page="patients" columns={patient_columns} entities={entity} pagination={pagination}/>
-    
+    </div> :
+    <PersonnelTable handle_click={handle_click} pagination={pagination} columns={personnel_columns} entities={personnel} page={page} />
+
+
     return (
-        <Layout page="Patient" sub_page="index">
-            { created_message && <Alert type="toast" icon="success" message={created_message} ></Alert>}
-            { error_message && <Alert type="modal" icon="error" title={error_message} ></Alert>}
+        <Layout page="personnel" sub_page="index" >
+            {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
+            {error_message && <Alert type="modal" message="" icon="error" title={error_message} />}
+            
             <CardContainer>
                 <div className="">
                     <div className="flex justify-between items-center py-4">
-                        <div className="flex">
-                            <SearchForm/>
+                        <div className="">
+                            <SearchForm />
                         </div>
                         <p className="">
-                            <Link to="/patients/new" className="inline-block text-green-700 bg-green-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Ajouter <FontAwesomeIcon icon={faPlus}/></Link>
+                            <AddButton url="/personnel/new"></AddButton>
                         </p>
                     </div>
                     {data}
                 </div>
             </CardContainer>
-        </Layout>
+        </Layout>  
     )
 }
 

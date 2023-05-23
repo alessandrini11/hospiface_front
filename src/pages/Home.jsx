@@ -4,17 +4,27 @@ import EntityCardCount from '../components/Cards/EntityCardCount'
 import { faCog, faUsers } from '@fortawesome/free-solid-svg-icons'
 import LineChart from '../components/Charts/LineChart'
 import DoughnutChart from '../components/Charts/DoughnutChart'
+import axios from 'axios'
 export default class Home extends Component {
     constructor(props){
         super(props)
-        this.state
+        this.state = {
+            patients: 0
+        }
+    }
+    componentDidMount(){
+        axios.get('/patients')
+            .then(response => {
+                this.setState({patients: response.data.data.data.length})
+            })
+
     }
     render() {
         return (
             <Layout>
                 <section>
                     <div className="grid grid-cols-4 gap-5">
-                        <EntityCardCount title="patients" amount={352} icon={faUsers} bg_color='blue' />
+                        <EntityCardCount title="patients" amount={this.state.patients} icon={faUsers} bg_color='blue' />
                         <EntityCardCount title="consultation" amount={1507} icon={faCog} bg_color='green' />
                         <EntityCardCount title="Med. Doctors" amount={10} icon={faUsers} bg_color="red" />
                         <EntityCardCount title="Nurses" amount={15} icon={faUsers} bg_color="red" />

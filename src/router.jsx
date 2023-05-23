@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import PatientIndex from './pages/patient/index'
 import PatientNew from './pages/patient/New'
 import PatientEdit from './pages/patient/Edit'
+import PatientShow from './pages/patient/Show'
+import PersonnelIndex from './pages/personnel/index'
   const Router = createBrowserRouter([
     {
       path: "/",
@@ -26,7 +28,11 @@ import PatientEdit from './pages/patient/Edit'
     },
     {
       path: "/patients/show/:patientId",
-      element: <PatientEdit />,
+      element: <PatientShow />,
+    },
+    {
+      path: "/personnel",
+      element: <PersonnelIndex />
     }
   ]); 
 export default Router
