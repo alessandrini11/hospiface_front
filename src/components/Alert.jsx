@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import Swal from 'sweetalert2'
-const Alert = ({title, message, icon, type}) => {
+const Alert = ({title, message = "", icon, type}) => {
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
