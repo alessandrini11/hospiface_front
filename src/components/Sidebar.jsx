@@ -24,7 +24,7 @@ const Sidebar = () => {
                 <ul>
                 <MenuItem title="Patient" links={[{url: '/patients/new', name: 'New'}, {url: '/patients', name: 'List'}]} />
                 <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel', name: 'List'}]} />
-                <MenuItem title="Consultation" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                <MenuItem title="Consultation" links={[{url: '/consultations/new', name: 'new'}, {url: '/consultations', name: 'List'}]} />
                 <MenuItem title="Resultat Consult." links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
                 <MenuItem title="Hospitalization" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
                 <MenuItem title="Rooms" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />

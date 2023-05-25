@@ -65,6 +65,7 @@ export const personnel_position = [
     { value: 'none', label: 'aucun'},
 ]
 export const sexs = [{ value: 'man', label: 'homme' },{ value: 'woman', label: 'femme' }]
+export const consultation_status = [{value: 0, label: 'started'}, {value: 1, label: 'ended'}]
 export const messages = {
     created: 'Créé avec Success',
     updated: 'Modifié avec Success',
@@ -74,3 +75,4 @@ export const messages = {
 
 export const patient_columns = ['noms', 'sexe', 'groupe sanguain', 'telephone', 'email', 'address', 'personne urgence', 'numéro urgence', 'statut', 'consultation', 'hospitalisation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const personnel_columns = ['nom', 'type', 'sous type', 'poste occupé', ' spécialité', 'sexe', 'blood group', 'telephone', 'email', 'address', 'statut', 'consultation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
+export const consultation_columns = ['patient', 'medecin', 'type', 'statut', 'taille(m)', 'poids(kg)', 'température(celcius)', 'tension_artérielle(mm/hg)', 'examen_médical', 'prescription_méd.', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PersonnelType } from '../entityPropsType'
+import { ConsultationType } from '../entityPropsType'
 import Pagination from './Pagination'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { personnel_status } from '../utils/constants'
 type Props = {
   columns: Array<string>,
-  entities: PersonnelType[],
+  entities: ConsultationType[],
   page: string | null,
   pagination: {
     actual_Page: number,
@@ -16,7 +16,7 @@ type Props = {
   handle_click: (id: number) => void
 }
 
-function PersonnelTable({columns, entities, page, pagination, handle_click}: Props) {
+const ConsultationTable = ({columns, entities, page, pagination, handle_click}: Props) => {
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -40,45 +40,36 @@ function PersonnelTable({columns, entities, page, pagination, handle_click}: Pro
                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td className="px-3 py-2">{index + 1}</td>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            { entity.title + ' ' + entity.firstName + ' ' + entity.lastName}
+                            { entity.patient?.first_name + ' ' + entity.patient?.last_name}
                         </th>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            { entity.doctor?.title + ' ' + entity.doctor?.first_name + ' ' + entity.doctor?.last_name}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             {entity.type}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.subType}
+                            {entity.status}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.positionHeld}
+                            {entity.parameter?.height}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.speciality.name}
+                            {entity.parameter?.weight}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.sex}
+                            {entity.parameter?.temparature}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.bloodGroup}
+                            {entity.parameter?.bloodPressure}
                         </td>
-                        <td className="px-6 py-4">
-                            {entity.phoneNumber}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.result?.medical_exams.length}
                         </td>
-                        <td className="px-6 py-4 text-center">
-                            {entity.email}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.result?.medical_order.length}
                         </td>
-                        <td className="px-6 py-4 text-center">
-                            {entity.address}
-                        </td>
-                        <td className="px-6 py-4">
-                            {personnel_status.filter(status => (
-                                status.value === entity.status
-                            )).map(status => (status.label))
-                            }
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                            {entity.consultations}
-                        </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 whitespace-nowrap">
                             {`${(new Date(entity.created_at)).getDate()}/${(new Date(entity.created_at)).getMonth() + 1}/${(new Date(entity.created_at)).getFullYear()}`}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -114,4 +105,4 @@ function PersonnelTable({columns, entities, page, pagination, handle_click}: Pro
   )
 }
 
-export default PersonnelTable
+export default ConsultationTable

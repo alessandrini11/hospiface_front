@@ -9,6 +9,25 @@ type createdUpdatedBy = {
     status: number
 
 }
+type Patient = {
+    id: number,
+    first_name: string,
+    last_name: string,
+    sex: string,
+    blood_group: string,
+    birth_date: string
+}
+type Doctor = {
+    id: number,
+    first_name: string,
+    last_name: string,
+    title: string,
+    sex: string,
+    speciality: {
+        id: number,
+        name: string
+    }
+}
 export type Pagination = {
     actual_Page: number,
     total_Page: number
@@ -43,3 +62,36 @@ export type PersonnelType = {
     updated_at: string
 }
 
+
+export type ConsultationType = {
+    id: number,
+    status: number,
+    type: string,
+    doctor: Doctor,
+    patient: Patient,
+    result: {
+        id: number, 
+        interpretation: string,
+        medical_order: {
+            id: number,
+            name: string,
+            dosage: string,
+            is_alternative: boolean
+        }[],
+        medical_exams: {
+            id: number,
+            type: string,
+            description: string
+        }[]
+    } | null,
+    parameter: {
+        temparature: number,
+        bloodPressure: number,
+        weight: number,
+        height: number
+    } | null,
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
+}

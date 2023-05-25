@@ -3,27 +3,28 @@ import Alert from '../../components/Alert'
 import CardContainer from '../../components/Cards/CardContainer'
 import SearchForm from '../../components/SearchForm'
 import AddButton from '../../components/Ui/AddButton'
-import {Pagination, PersonnelType} from '../../entityPropsType/index'
-import PersonnelTable from '../../components/PersonnelTable'
+import {ConsultationType, Pagination} from '../../entityPropsType/index'
 import Spinner from '../../components/Ui/Spinner'
-import { messages, personnel_columns } from '../../utils/constants'
+import { messages, consultation_columns } from '../../utils/constants'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import ConsultationTable from '../../components/ConsultationTable'
 type Props = {}
-const index = (props: Props) => {
+
+const Index = (props: Props) => {
     const [search_params, set_search_params] = useSearchParams()
     const [created_message, set_created_message] = useState<string | null>(null)
     const [error_message, set_error_message] = useState(null)
     const [pagination, set_pagination] = useState<Pagination | null>(null)
-    const [personnel, set_personnel] = useState<PersonnelType[] | null>(null)
+    const [personnel, set_personnel] = useState<ConsultationType[] | null>(null)
     const [page, set_page] = useState<string | null>(search_params.get('page'))
     const [query, setQuery] = useState(search_params.get('query'))
     const [confirm_delete, set_confirm_delete] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`/personnels?actualPage=${page || 1}&query=${query || ''}`)
+        axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
                 set_personnel(response.data.data.data)
                 set_pagination({
@@ -79,8 +80,7 @@ const index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <PersonnelTable handle_click={handle_click} pagination={pagination} columns={personnel_columns} entities={personnel} page={page} />
-
+    <ConsultationTable handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page={page} />
 
     return (
         <>
@@ -94,7 +94,7 @@ const index = (props: Props) => {
                             <SearchForm />
                         </div>
                         <p className="">
-                            <AddButton url="/personnel/new"></AddButton>
+                            <AddButton url="/consultation/new"></AddButton>
                         </p>
                     </div>
                     {data}
@@ -104,4 +104,4 @@ const index = (props: Props) => {
     )
 }
 
-export default index
+export default Index
