@@ -4,7 +4,7 @@ import Input from '../../components/Ui/Input'
 import { Controller, useForm } from 'react-hook-form'
 import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import PersonnelModel from '../../model/Personnel.model'
 import axios from 'axios'
@@ -16,20 +16,36 @@ import { messages,
 } from '../../utils/constants'
 import { personnel_status } from '../../utils/constants'
 import { blood_groups } from '../../utils/constants'
-
 type Props = {}
 
-const New = (props: Props) => {
-    const { register, getValues, handleSubmit, control, formState:{ errors } } = useForm({
+const Edit = (props: Props) => {
+    const { register, reset, handleSubmit, control, formState:{ errors } } = useForm({
         resolver: yupResolver(PersonnelModel)
     });
     const navigate = useNavigate()
+    const {personnelId} = useParams()
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [sumbiting, setSubmiting] = useState<boolean>(false)
     const [specialities, set_specialities] = useState<Array<{value: number, label: string}>>()
     const [sub_type, set_sub_type] = useState<Array<{value: string, label: string}>>([])
     const [is_doctor, set_is_doctor] = useState(false)
     useEffect(() => {
+        axios.get(`/personnels/${personnelId}`)
+            .then(response => {
+                set_sub_type(personnel_subType[response.data.data.type])
+                reset({
+                    ...response.data.data,
+                    speciality: response.data.data.speciality.id
+
+                })
+            })
+            .catch(error => {
+                if(error.response){
+                    setErrorMessage(error.response.data.error.message)
+                }else {
+                    setErrorMessage(error.message)
+                }
+            })
         axios.get('/specialities')
             .then(response => {
                 const specialityArr: Array<{label: string, value: number}>=[]
@@ -41,11 +57,12 @@ const New = (props: Props) => {
     }, [])
     const onSubmit = (body: any): void => {
         setSubmiting(true)
-        const reqBody = {...body, service: [body.service]}
-        axios.post('/personnels', body)
+        console.log(body)
+        axios.put(`/personnels/${personnelId}`, body)
             .then(response => {
-                if(response.status === 201){
-                    localStorage.setItem('personnel', messages.created)
+                console.log(response)
+                if(response.status === 200){
+                    localStorage.setItem('personnel', messages.updated)
                     navigate('/personnel')
                 }
             })
@@ -98,23 +115,6 @@ const New = (props: Props) => {
                             )}
                         />
                 </div>
-                {/* { getValues("title") == "Dr." || getValues("title") == "Pr." ? <div className="">
-                    <label htmlFor="speciality" className="block mb-2 text-sm font-medium text-gray-900">Specialité</label>
-                        <Controller
-                            name="speciality"
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { onChange, value, name, ref } }) => (
-                                <ReactSelect
-                                    value={specialities?.find((c) => c.value === value)}
-                                    onChange={value => onChange(value?.value)}
-                                    options={specialities}
-                                    ref={ref}
-                                    name={name}
-                                />
-                            )}
-                        />
-                </div> : null} */}
                 <div className="">
                     <label htmlFor="sex" className="block mb-2 text-sm font-medium text-gray-900">Sexe</label>
                         <Controller
@@ -157,12 +157,12 @@ const New = (props: Props) => {
                             rules={{ required: true }}
                             render={({ field: { onChange, value, name, ref } }) => (
                                 <ReactSelect
-                                value={blood_groups.find((c) => c.value === value)}
-                                onChange={value => onChange(value?.value)}
-                                options={blood_groups}
-                                ref={ref}
-                                name={name}
-                            />
+                                    value={blood_groups.find((c) => c.value === value)}
+                                    onChange={value => onChange(value?.value)}
+                                    options={blood_groups}
+                                    ref={ref}
+                                    name={name}
+                                />
                             )}
                         />
                 </div>
@@ -198,12 +198,12 @@ const New = (props: Props) => {
                             rules={{ required: true }}
                             render={({ field: { onChange, value, name, ref } }) => (
                                 <ReactSelect
-                                value={sub_type?.find((c) => c?.value === value)}
-                                onChange={value => onChange(value?.value)}
-                                options={sub_type}
-                                ref={ref}
-                                name={name}
-                            />
+                                    value={sub_type?.find((c) => c?.value === value)}
+                                    onChange={value => onChange(value?.value)}
+                                    options={sub_type}
+                                    ref={ref}
+                                    name={name}
+                                />
                             )}
                         />
                 </div>
@@ -238,4 +238,4 @@ const New = (props: Props) => {
     )
 }
 
-export default New
+export default Edit

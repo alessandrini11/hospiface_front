@@ -68,7 +68,7 @@ export const sexs = [{ value: 'man', label: 'homme' },{ value: 'woman', label: '
 export const messages = {
     created: 'Créé avec Success',
     updated: 'Modifié avec Success',
-    updated: 'Supprimé avec Success',
+    deleted: 'Supprimé avec Success',
 
 }
 

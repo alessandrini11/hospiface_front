@@ -1,15 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form';
-import Layout from '../../components/Layout';
 import SubmitButton from '../../components/Ui/SubmitButton';
 import ReactSelect from 'react-select'
-import * as yup from 'yup'
 import Input from '../../components/Ui/Input';
 import PatientModel from '../../model/Patient.model'
 import Alert from '../../components/Alert';
 import { blood_groups, messages, patient_status, sexs } from '../../utils/constants';
-import { redirect, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Edit = () => {
@@ -123,7 +121,7 @@ const Edit = () => {
                     />
                 </div>
                 <div className="">
-                    <SubmitButton submiting={sumbiting} label="enregistrer"/>
+                    <SubmitButton submiting={sumbiting} label="mise à jour"/>
                 </div>
             </form>
         </>

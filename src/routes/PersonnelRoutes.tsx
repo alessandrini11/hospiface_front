@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Index from '../pages/personnel'
 import New from '../pages/personnel/New'
+import Edit from '../pages/personnel/Edit'
 type Props = {}
 
 const PersonnelRoutes = (props: Props) => {
@@ -9,6 +10,7 @@ const PersonnelRoutes = (props: Props) => {
     <Routes>
         <Route path="/" element={<Index />}/>
         <Route path="new" element={<New />}/>
+        <Route path="edit/:personnelId" element={<Edit />}/>
     </Routes>
   )
 }
