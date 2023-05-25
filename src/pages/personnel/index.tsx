@@ -89,7 +89,7 @@ const index = (props: Props) => {
             
             <CardContainer>
                 <div className="">
-                    <div className="flex justify-between items-center py-4">
+                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
                         <div className="">
                             <SearchForm />
                         </div>
