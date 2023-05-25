@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import CardContainer from '../../components/Cards/CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -85,7 +85,7 @@ const index = () => {
     <Table handle_click={handleDelete} page="patients" columns={patient_columns} entities={entity} pagination={pagination}/>
     
     return (
-        <Layout page="Patient" sub_page="index">
+        <Fragment>
             { created_message && <Alert type="toast" icon="success" message={created_message} ></Alert>}
             { error_message && <Alert type="modal" icon="error" title={error_message} ></Alert>}
             <CardContainer>
@@ -101,7 +101,7 @@ const index = () => {
                     {data}
                 </div>
             </CardContainer>
-        </Layout>
+        </Fragment>
     )
 }
 

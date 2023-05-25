@@ -48,7 +48,7 @@ const Edit = () => {
         })
     }
     return (
-        <Layout page="patient" sub_page="edit">
+        <>
             { isError && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
@@ -126,7 +126,7 @@ const Edit = () => {
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>
-        </Layout>
+        </>
     )
 }
 

@@ -83,7 +83,7 @@ const index = (props: Props) => {
 
 
     return (
-        <Layout page="personnel" sub_page="index" >
+        <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" message="" icon="error" title={error_message} />}
             
@@ -100,7 +100,7 @@ const index = (props: Props) => {
                     {data}
                 </div>
             </CardContainer>
-        </Layout>  
+        </>  
     )
 }
 

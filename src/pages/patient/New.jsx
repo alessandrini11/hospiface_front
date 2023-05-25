@@ -35,7 +35,7 @@ const New = () => {
             })
     }
     return (
-        <Layout page="patient" sub_page="add">
+        <>
             { isError && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
@@ -114,7 +114,7 @@ const New = () => {
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>
-        </Layout>
+        </>
     )
 }
 

@@ -1,20 +1,19 @@
 import { Route, Routes } from "react-router-dom"
-import Edit from "./pages/patient/Edit"
-import New from "./pages/patient/New"
-import Index from "./pages/patient/index"
 import Home from "./pages/Home"
+import PatientRoutes from "./routes/PatientRoutes"
+import PersonnelRoutes from "./routes/PersonnelRoutes"
+import Layout from "./components/Layout"
 
 function App() {
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />}></Route>
-
-      <Route path="/patients/*" element={<Index />}>
-        <Route path="new" element={<New />} />
-        <Route path="edit/:patientId" element={<Edit />} />
-      </Route>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/patients/*" element={<PatientRoutes />}></Route>
+        <Route path="/personnel/*" element={<PersonnelRoutes />}></Route>
     </Routes>
+    </Layout>
   )
 }
 

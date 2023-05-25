@@ -3,8 +3,8 @@ import Container from './Container'
 import MenuItem from './MenuItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross, faX } from '@fortawesome/free-solid-svg-icons'
-
-const MobileMenu = ({handleMobileMenu, open, icon}) => {
+import icon from '../assets/react.svg'
+const MobileMenu = ({handleMobileMenu, open}) => {
     return (
         <div className={`lg:hidden absolute z-10 top-0 w-full ${ open && '-translate-x-full'} transform transition-all duration-300 bg-black/75`}>
             <div style={{minHeight: '100vh'}} className="w-1/2 shadow-md shadow-black bg-white z-10">
