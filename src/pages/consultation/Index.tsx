@@ -26,6 +26,7 @@ const Index = (props: Props) => {
     useEffect(() => {
         axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
+                console.log(response.data.data.data)
                 set_personnel(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,
@@ -35,11 +36,11 @@ const Index = (props: Props) => {
             .catch(error => {
                 set_error_message(error.message)
             })
-        if(localStorage.getItem('personnel')){
-            set_created_message(localStorage.getItem('personnel'))
+        if(localStorage.getItem('consultations')){
+            set_created_message(localStorage.getItem('consultations'))
         }
         return () => {
-            localStorage.removeItem('personnel')
+            localStorage.removeItem('consultations')
         }
     }, [page, query])
 
@@ -94,7 +95,7 @@ const Index = (props: Props) => {
                             <SearchForm />
                         </div>
                         <p className="">
-                            <AddButton url="/consultation/new"></AddButton>
+                            <AddButton url="/consultations/new"></AddButton>
                         </p>
                     </div>
                     {data}

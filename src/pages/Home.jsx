@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Layout from '../components/Layout'
 import EntityCardCount from '../components/Cards/EntityCardCount'
 import { faCog, faUsers } from '@fortawesome/free-solid-svg-icons'
 import LineChart from '../components/Charts/LineChart'
@@ -21,7 +20,7 @@ export default class Home extends Component {
     }
     render() {
         return (
-            <Layout>
+            <>
                 <section>
                     <div className="grid grid-cols-4 gap-5">
                         <EntityCardCount title="patients" amount={this.state.patients} icon={faUsers} bg_color='blue' />
@@ -46,7 +45,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </section>
-            </Layout>
+            </>
         )
     }
 }

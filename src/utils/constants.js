@@ -12,6 +12,15 @@ export const patient_status = [
     {value: 1, label: "mort"},
     {value: 2, label: "hostpitalisé"},
 ]
+
+export const consultation_status = [
+    {value: 0, label: 'en cours'}, 
+    {value: 1, label: 'terminé'}
+]
+export const consultation_type = [
+    {value: 'normal', label: 'normal'},
+    {value: 'check-up', label: 'check-up'}
+]
 export const personnel_type = [
     {value: 'medical', label: 'medical'},
     {value: 'administrative', label: 'administratif'},
@@ -65,7 +74,6 @@ export const personnel_position = [
     { value: 'none', label: 'aucun'},
 ]
 export const sexs = [{ value: 'man', label: 'homme' },{ value: 'woman', label: 'femme' }]
-export const consultation_status = [{value: 0, label: 'started'}, {value: 1, label: 'ended'}]
 export const messages = {
     created: 'Créé avec Success',
     updated: 'Modifié avec Success',

@@ -4,7 +4,7 @@ import Pagination from './Pagination'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
-import { personnel_status } from '../utils/constants'
+import { consultation_status, personnel_status } from '../utils/constants'
 type Props = {
   columns: Array<string>,
   entities: ConsultationType[],
@@ -45,28 +45,28 @@ const ConsultationTable = ({columns, entities, page, pagination, handle_click}: 
                         <td className="px-6 py-4 whitespace-nowrap">
                             { entity.doctor?.title + ' ' + entity.doctor?.first_name + ' ' + entity.doctor?.last_name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
                             {entity.type}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.status}
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
+                            {consultation_status.find(c => (c.value === entity.status))?.label}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
                             {entity.parameter?.height}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
                             {entity.parameter?.weight}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.parameter?.temparature}
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
+                            {entity.parameter?.temperature}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
                             {entity.parameter?.bloodPressure}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
                             {entity.result?.medical_exams.length}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 text-center whitespace-nowrap">
                             {entity.result?.medical_order.length}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">

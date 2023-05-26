@@ -85,7 +85,7 @@ export type ConsultationType = {
         }[]
     } | null,
     parameter: {
-        temparature: number,
+        temperature: number,
         bloodPressure: number,
         weight: number,
         height: number
