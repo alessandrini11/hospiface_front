@@ -29,7 +29,6 @@ const Edit = (props: Props) => {
     useEffect(() => {
         axios.get(`/consultations/${consultationId}`)
             .then((response) => {
-                console.log(response.data.data)
                 const data: ConsultationType = response.data.data
                 const consultation = {
                     ...data,
@@ -49,7 +48,7 @@ const Edit = (props: Props) => {
                     setErrorMessage(error.message)
                 }
             })
-            axios.get('/personnels')
+        axios.get('/personnels')
             .then(response => {
                 const doctorsArr: Array<{label: string, value: number}>=[]
                 const doctor: PersonnelType[] = response.data.data.data.filter((personnel: PersonnelType) =>  (
