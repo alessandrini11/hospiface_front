@@ -6,7 +6,7 @@ import AddButton from '../../components/Ui/AddButton'
 import {ConsultationType, Pagination} from '../../entityPropsType/index'
 import Spinner from '../../components/Ui/Spinner'
 import { messages, consultation_columns } from '../../utils/constants'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import ConsultationTable from '../../components/ConsultationTable'
@@ -21,7 +21,6 @@ const Index = (props: Props) => {
     const [page, set_page] = useState<string | null>(search_params.get('page'))
     const [query, setQuery] = useState(search_params.get('query'))
     const [confirm_delete, set_confirm_delete] = useState(false)
-    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)

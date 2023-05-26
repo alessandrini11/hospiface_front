@@ -4,7 +4,7 @@ import Input from '../../components/Ui/Input'
 import { Controller, useForm } from 'react-hook-form'
 import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'
 import { messages, 
@@ -12,21 +12,44 @@ import { messages,
     consultation_type
 } from '../../utils/constants'
 import ConsultationModel from '../../model/Consulataion.model'
-import { PersonnelType } from '../../entityPropsType'
+import { ConsultationType, PersonnelType } from '../../entityPropsType'
+
 type Props = {}
 
-const New = (props: Props) => {
-    const { register, handleSubmit, control, formState:{ errors } } = useForm({
+const Edit = (props: Props) => {
+    const { register, reset, handleSubmit, control, formState:{ errors } } = useForm({
         resolver: yupResolver(ConsultationModel)
     });
     const navigate = useNavigate()
+    const {consultationId} = useParams()
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [sumbiting, setSubmiting] = useState<boolean>(false)
     const [doctors, set_doctors] = useState<Array<{value: number, label: string}>>()
     const [patients, set_patients] = useState<Array<{value: number, label: string}>>()
-    const [sub_type, set_sub_type] = useState<Array<{value: string, label: string}>>([])
     useEffect(() => {
-        axios.get('/personnels')
+        axios.get(`/consultations/${consultationId}`)
+            .then((response) => {
+                console.log(response.data.data)
+                const data: ConsultationType = response.data.data
+                const consultation = {
+                    ...data,
+                    patient: data.patient.id,
+                    doctor: data.doctor.id,
+                    temperature: data.parameter?.temperature,
+                    height: data.parameter?.height,
+                    weight: data.parameter?.weight,
+                    bloodPressure: data.parameter?.bloodPressure
+                }
+                reset(consultation)
+            })
+            .catch(error => {
+                if(error.response){
+                    setErrorMessage(error.response.data.error.message)
+                }else {
+                    setErrorMessage(error.message)
+                }
+            })
+            axios.get('/personnels')
             .then(response => {
                 const doctorsArr: Array<{label: string, value: number}>=[]
                 const doctor: PersonnelType[] = response.data.data.data.filter((personnel: PersonnelType) =>  (
@@ -45,14 +68,15 @@ const New = (props: Props) => {
                 })
                 set_patients(patientsArr)
             })
-    }, [])
+    }, [consultationId])
     const onSubmit = (body: any): void => {
-        console.log(body)
         setSubmiting(true)
-        axios.post('/consultations', body)
+        console.log(body)
+        axios.put(`/consultations/${consultationId}`, body)
             .then(response => {
-                if(response.status === 201){
-                    localStorage.setItem('consultations', messages.created)
+                console.log(response)
+                if(response.status === 200){
+                    localStorage.setItem('consultations', messages.updated)
                     navigate('/consultations')
                 }
             })
@@ -146,11 +170,11 @@ const New = (props: Props) => {
                         />
                 </div>
                 <div className="">
-                    <SubmitButton submiting={sumbiting} label="enregistrer"/>
+                    <SubmitButton submiting={sumbiting} label="mise à jour"/>
                 </div>
             </form>
         </>
     )
 }
 
-export default New
+export default Edit
