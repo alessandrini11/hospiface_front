@@ -47,7 +47,6 @@ const New = (props: Props) => {
             })
     }, [])
     const onSubmit = (body: any): void => {
-        console.log(body)
         setSubmiting(true)
         axios.post('/consultations', body)
             .then(response => {

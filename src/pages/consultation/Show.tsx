@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ConsultationType } from '../../entityPropsType'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Alert from '../../components/Alert'
 import Spinner from '../../components/Ui/Spinner'
 import { consultation_status } from '../../utils/constants'
@@ -52,7 +52,7 @@ const Show = (props: Props) => {
           <span>Status</span> : {consultation_status.find(c => c.value === consultation.status)?.label}
         </p>
         <div>
-          <span>Examen</span> :
+          <span>Examen</span> : <Link to={`/medicalexam/new/${consultation.result?.id}`}>new</Link>
           <ul>
             {
               consultation.result?.medical_exams.map((exam, index) => (
@@ -62,7 +62,7 @@ const Show = (props: Props) => {
           </ul>
         </div>
         <div>
-          <span>Prescription Médicale</span> :
+          <span>Prescription Médicale</span> : <Link to={`/medicalorder/new/${consultation.result?.id}`} >New</Link>
           <ul>
             {
               consultation.result?.medical_order.map((order, index) => (

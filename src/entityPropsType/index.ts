@@ -62,6 +62,10 @@ export type PersonnelType = {
     updated_at: string
 }
 
+export type MedicalExamType = {
+    type: string,
+    description: string
+}
 
 export type ConsultationType = {
     id: number,
