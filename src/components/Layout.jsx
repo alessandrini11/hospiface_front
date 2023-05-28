@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Navigation from './Navigation'
 import Container from './Container'
-import Icon from '../assets/react.svg'
-import MenuItem from './MenuItem'
 import MobileMenu from './MobileMenu'
-import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
 const Layout = ({page, sub_page, children}) => {
   const [open, setOpen] = useState(true)

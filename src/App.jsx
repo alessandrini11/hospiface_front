@@ -5,6 +5,7 @@ import PersonnelRoutes from "./routes/PersonnelRoutes"
 import ConsulationRoutes from "./routes/ConsultationRoutes"
 import Layout from "./components/Layout"
 import MedicalExamRoutes from "./routes/MedicalExamRoutes"
+import DrugRoutes from "./routes/DrugRoutes"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/personnel/*" element={<PersonnelRoutes />}></Route>
         <Route path="/consultations/*" element={<ConsulationRoutes />}></Route>
         <Route path="/medicalexam/*" element={<MedicalExamRoutes />}></Route>
+        <Route path="/drug/*" element={<DrugRoutes />}></Route>
     </Routes>
     </Layout>
   )

@@ -10,6 +10,8 @@ import axios from 'axios';
 import MedicalExam from '../../model/MedicalExam';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MedicalExamType } from '../../entityPropsType';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {}
 
@@ -23,6 +25,11 @@ function New({}: Props) {
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [sumbiting, setSubmiting] = useState<boolean>(false)
   
+  const delete_drug = (index: number) => {
+    const updated_medical_exam: MedicalExamType[] = [...medical_exams]
+    updated_medical_exam.splice(index, 1)
+    set_medical_exams(updated_medical_exam)
+  }
   const onSubmit = (body: any): void => {
     set_medical_exams([...medical_exams, body])
     reset({})
@@ -51,6 +58,7 @@ function New({}: Props) {
                   <span>numéro: {index + 1}</span>
                   <span>Type: </span> {exam.type}
                   <span>Description: </span> {exam.description}
+                  <span className="cursor-pointer" onClick={() => delete_drug(index)}><FontAwesomeIcon className="text-red-500" icon={faTrash} /></span>
                 </li>
               ))}
             </ul>
@@ -82,7 +90,7 @@ function New({}: Props) {
           </div>
       </form>
       </div>
-  </>
+    </>
   )
 }
 

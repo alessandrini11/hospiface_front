@@ -78,10 +78,12 @@ export type ConsultationType = {
         interpretation: string,
         medical_order: {
             id: number,
-            name: string,
-            dosage: string,
-            is_alternative: boolean
-        }[],
+            drugs: {
+                id: number,
+                name: string,
+                dosage: string,
+            }[]
+        },
         medical_exams: {
             id: number,
             type: string,
@@ -98,4 +100,10 @@ export type ConsultationType = {
     created_at: string,
     updated_by: createdUpdatedBy,
     updated_at: string
+}
+
+export type DrugType = {
+    id: string,
+    name: string,
+    dosage: string
 }

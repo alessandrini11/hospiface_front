@@ -67,7 +67,7 @@ const ConsultationTable = ({columns, entities, page, pagination, handle_click}: 
                             {entity.result?.medical_exams.length}
                         </td>
                         <td className="px-6 py-4 text-center whitespace-nowrap">
-                            {entity.result?.medical_order.length}
+                            {entity.result?.medical_order.drugs.length}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             {`${(new Date(entity.created_at)).getDate()}/${(new Date(entity.created_at)).getMonth() + 1}/${(new Date(entity.created_at)).getFullYear()}`}

@@ -25,7 +25,6 @@ const Index = (props: Props) => {
     useEffect(() => {
         axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
-                console.log(response.data.data.data)
                 set_personnel(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,

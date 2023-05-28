@@ -85,6 +85,15 @@ export const medical_exam = [
     {value: 'gastrique', label: 'gastrique'},
     {value: 'glucide', label: 'glucide'}
 ]
+export const drug_dosage = [
+    {value: 'matin-midi-soir', label: 'matin-midi-soir'},
+    {value: 'matin-soir', label: 'matin-soir'},
+    {value: 'matin-soir', label: 'matin-soir'},
+    {value: 'matin-soir', label: 'matin-soir'},
+    {value: 'matin-soir', label: 'matin-soir'},
+    {value: 'matin-soir', label: 'matin-soir'},
+    {value: 'matin-soir', label: 'matin-soir'},
+]
 export const patient_columns = ['noms', 'sexe', 'groupe sanguain', 'telephone', 'email', 'address', 'personne urgence', 'numéro urgence', 'statut', 'consultation', 'hospitalisation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const personnel_columns = ['nom', 'type', 'sous type', 'poste occupé', ' spécialité', 'sexe', 'blood group', 'telephone', 'email', 'address', 'statut', 'consultation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const consultation_columns = ['patient', 'medecin', 'type', 'statut', 'taille(m)', 'poids(kg)', 'température(celcius)', 'tension_artérielle(mm/hg)', 'examen_médical', 'prescription_méd.', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
