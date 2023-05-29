@@ -41,8 +41,12 @@ function New({}: Props) {
         .then(response => {
         })
         .catch(error => {
-            setSubmiting(false)
-            setErrorMessage(error.message)
+          setSubmiting(false)
+          if(error.response){
+            setErrorMessage(error.response.data.error.message)
+          }else {
+              setErrorMessage(error.message)
+          }
         })
     })
   }

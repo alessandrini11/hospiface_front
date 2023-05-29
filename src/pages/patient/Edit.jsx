@@ -40,9 +40,11 @@ const Edit = () => {
         })
         .catch(error => {
             setSubmiting(false)
-            console.log(error)
-            setErrorMessage(error.message)
-            setIsError(true)
+            if(error.response){
+                setErrorMessage(error.response.data.error.message)
+            }else {
+                setErrorMessage(error.message)
+            }
         })
     }
     return (

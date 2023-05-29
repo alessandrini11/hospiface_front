@@ -30,8 +30,11 @@ const New = () => {
             })
             .catch(error => {
                 setSubmiting(false)
-                setErrorMessage(error.message)
-                setIsError(true)
+                if(error.response){
+                    setErrorMessage(error.response.data.error.message)
+                }else {
+                    setErrorMessage(error.message)
+                }
             })
     }
     return (

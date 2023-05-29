@@ -28,7 +28,7 @@ type Doctor = {
         name: string
     }
 }
-export type Room = {
+export type RoomType = {
     id: number,
     number: number,
     beds: number
@@ -132,7 +132,7 @@ export type HospitalizationType = {
     startDate: string,
     endDate: string,
     patient: Patient,
-    room: Room | null,
+    room: RoomType | null,
     description: string,
     created_by: createdUpdatedBy,
     created_at: string,

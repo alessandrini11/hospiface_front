@@ -99,6 +99,12 @@ export const hospitalisation_status = [
     {value: 1, label: 'started'},
     {value: 2, label: 'ended'}
 ]
+export const hospitalisation_type = [
+    {value: 'observation', label: 'observation'},
+    {value: 'medical care', label: 'soins médical'},
+    {value: 'intensive care', label: 'soins intensif'},
+    {value: 'surgical recovery', label: 'post opération'}
+]
 export const patient_columns = ['noms', 'sexe', 'groupe sanguain', 'telephone', 'email', 'address', 'personne urgence', 'numéro urgence', 'statut', 'consultation', 'hospitalisation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const personnel_columns = ['nom', 'type', 'sous type', 'poste occupé', ' spécialité', 'sexe', 'blood group', 'telephone', 'email', 'address', 'statut', 'consultation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const consultation_columns = ['patient', 'medecin', 'type', 'statut', 'taille(m)', 'poids(kg)', 'température(celcius)', 'tension_artérielle(mm/hg)', 'examen_médical', 'prescription_méd.', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']

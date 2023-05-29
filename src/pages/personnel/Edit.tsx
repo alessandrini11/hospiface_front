@@ -68,7 +68,11 @@ const Edit = (props: Props) => {
             })
             .catch(error => {
                 setSubmiting(true)
-                setErrorMessage(error.message)
+                if(error.response){
+                    setErrorMessage(error.response.data.error.message)
+                }else {
+                    setErrorMessage(error.message)
+                }
             })
     }
     return (
