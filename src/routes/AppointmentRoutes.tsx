@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AppointmentIndex from '../pages/Appointment/Index'
 import AppointmentNew from '../pages/Appointment/New'
+import AppointmentEdit from '../pages/Appointment/Edit'
 type Props = {}
 
 const AppointmentRoutes = (props: Props) => {
@@ -9,7 +10,7 @@ const AppointmentRoutes = (props: Props) => {
     <Routes>
         <Route path="/" element={<AppointmentIndex />}/>
         <Route path="new" element={<AppointmentNew />} />
-        {/* <Route path="edit/:consultationId" element={<ConsultationEdit />} /> */}
+        <Route path="edit/:appointmentId" element={<AppointmentEdit />} />
         {/* <Route path="show/:consultationId" element={<ConsultationShow />} /> */}
     </Routes>
   )
