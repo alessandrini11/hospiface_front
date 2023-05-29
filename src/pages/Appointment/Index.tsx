@@ -94,7 +94,7 @@ const Index = (props: Props) => {
                             <SearchForm />
                         </div>
                         <p className="">
-                            <AddButton url="/appointment/new"></AddButton>
+                            <AddButton url="/rendezvous/new"></AddButton>
                         </p>
                     </div>
                     {data}
