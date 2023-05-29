@@ -6,10 +6,7 @@ type Props = {}
 const DrugRoutes = (props: Props) => {
   return (
     <Routes>
-        {/* <Route path="/" element={<ConsultationIndex />}/> */}
-        <Route path="new/:orderId" element={<DrugNew />} />
-        {/* <Route path="edit/:consultationId" element={<ConsultationEdit />} /> */}
-        {/* <Route path="show/:consultationId" element={<ConsultationShow />} /> */}
+      <Route path="new/:orderId" element={<DrugNew />} />
     </Routes>
   )
 }

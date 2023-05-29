@@ -4,6 +4,7 @@ import MenuItem from './MenuItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross, faX } from '@fortawesome/free-solid-svg-icons'
 import icon from '../assets/react.svg'
+import MenuItems from './MenuItems'
 const MobileMenu = ({handleMobileMenu, open}) => {
     return (
         <div className={`lg:hidden absolute z-10 top-0 w-full ${ open && '-translate-x-full'} transform transition-all duration-300 bg-black/75`}>
@@ -22,17 +23,10 @@ const MobileMenu = ({handleMobileMenu, open}) => {
                 <div className="py-2">
                 <div className="w-10/12 mx-auto">
                     <div>
-                    <a href="/" className="">Dashboard</a>
-                    <ul>
-                        <MenuItem title="Patient" links={[{url: '/patients/new', name: 'new'}, {url: '/patients/list', name: 'List'}]} />
-                        <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Consultation" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Resultat Consult." links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Hospitalization" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Rooms" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                        <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                    </ul>
+                        <a href="/" className="">Dashboard</a>
+                        <ul>
+                            <MenuItems />
+                        </ul>
                     </div>
                 </div>
                 </div>

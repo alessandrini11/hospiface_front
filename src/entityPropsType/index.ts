@@ -107,3 +107,15 @@ export type DrugType = {
     name: string,
     dosage: string
 }
+
+export type AppointmentType = {
+    id: number,
+    patient: Patient,
+    doctor: Doctor,
+    status: number,
+    date: string,
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
+}

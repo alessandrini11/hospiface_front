@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import AppointmentTable from '../../components/AppointmentTable'
+import { useSearchParams } from 'react-router-dom'
+import { AppointmentType, Pagination } from '../../entityPropsType'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { appointment_columns, messages } from '../../utils/constants'
+import Spinner from '../../components/Ui/Spinner'
 import Alert from '../../components/Alert'
 import CardContainer from '../../components/Cards/CardContainer'
 import SearchForm from '../../components/SearchForm'
 import AddButton from '../../components/Ui/AddButton'
-import {ConsultationType, Pagination} from '../../entityPropsType/index'
-import Spinner from '../../components/Ui/Spinner'
-import { messages, consultation_columns } from '../../utils/constants'
-import { useSearchParams } from 'react-router-dom'
-import axios from 'axios'
-import Swal from 'sweetalert2'
-import ConsultationTable from '../../components/ConsultationTable'
 type Props = {}
 
 const Index = (props: Props) => {
@@ -17,14 +17,23 @@ const Index = (props: Props) => {
     const [created_message, set_created_message] = useState<string | null>(null)
     const [error_message, set_error_message] = useState(null)
     const [pagination, set_pagination] = useState<Pagination | null>(null)
-    const [personnel, set_personnel] = useState<ConsultationType[] | null>(null)
+    const [appointments, set_appointments] = useState<AppointmentType[] | null>(null)
     const [page, set_page] = useState<string | null>(search_params.get('page'))
     const [query, setQuery] = useState(search_params.get('query'))
-
+    
     useEffect(() => {
-        axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
+        get_appointments()
+        if(localStorage.getItem('appointments')){
+            set_created_message(localStorage.getItem('appointments'))
+        }
+        return () => {
+            localStorage.removeItem('appointments')
+        }
+    }, [])
+    const get_appointments = () => {
+        axios.get(`/appointments?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
-                set_personnel(response.data.data.data)
+                set_appointments(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,
                     total_Page: response.data.data.totalPages
@@ -33,14 +42,7 @@ const Index = (props: Props) => {
             .catch(error => {
                 set_error_message(error.message)
             })
-        if(localStorage.getItem('consultations')){
-            set_created_message(localStorage.getItem('consultations'))
-        }
-        return () => {
-            localStorage.removeItem('consultations')
-        }
-    }, [page, query])
-
+    }
     const handle_click = (id: number): void => {
         Swal.fire({
             title: 'Voulez vous supprimer ?',
@@ -74,11 +76,11 @@ const Index = (props: Props) => {
             }
         })
     }
-    const data = !personnel ?
+    const data = !appointments ?
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <ConsultationTable handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page={page} />
+    <AppointmentTable handle_click={handle_click} pagination={pagination} columns={appointment_columns} entities={appointments} page={page} />
 
     return (
         <>
@@ -92,13 +94,13 @@ const Index = (props: Props) => {
                             <SearchForm />
                         </div>
                         <p className="">
-                            <AddButton url="/consultations/new"></AddButton>
+                            <AddButton url="/appointment/new"></AddButton>
                         </p>
                     </div>
                     {data}
                 </div>
             </CardContainer>
-        </>  
+        </>
     )
 }
 

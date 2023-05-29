@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form';
-import { medical_exam, messages } from '../../utils/constants';
+import { medical_exam } from '../../utils/constants';
 import Select from 'react-select'
 import Alert from '../../components/Alert';
 import Input from '../../components/Ui/Input';
@@ -39,7 +39,6 @@ function New({}: Props) {
     medical_exams?.forEach(exam => {
       axios.post(`/medical_exams`, {...exam, result: resultId})
         .then(response => {
-          console.log(response.data.data)
         })
         .catch(error => {
             setSubmiting(false)

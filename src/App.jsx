@@ -6,6 +6,7 @@ import ConsulationRoutes from "./routes/ConsultationRoutes"
 import Layout from "./components/Layout"
 import MedicalExamRoutes from "./routes/MedicalExamRoutes"
 import DrugRoutes from "./routes/DrugRoutes"
+import AppointmentRoutes from "./routes/AppointmentRoutes"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/consultations/*" element={<ConsulationRoutes />}></Route>
         <Route path="/medicalexam/*" element={<MedicalExamRoutes />}></Route>
         <Route path="/drug/*" element={<DrugRoutes />}></Route>
+        <Route path="/rendezvous/*" element={<AppointmentRoutes />}></Route>
     </Routes>
     </Layout>
   )

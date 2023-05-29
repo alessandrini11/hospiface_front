@@ -3,6 +3,7 @@ import Container from './Container'
 import MenuItem from './MenuItem'
 import Icon from '../assets/react.svg'
 import { Link } from 'react-router-dom'
+import MenuItems from './MenuItems'
 
 const Sidebar = () => {
   return (
@@ -22,14 +23,7 @@ const Sidebar = () => {
             <div>
                 <Link to="/" className="">Dashboard</Link>
                 <ul>
-                <MenuItem title="Patient" links={[{url: '/patients/new', name: 'New'}, {url: '/patients', name: 'List'}]} />
-                <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel', name: 'List'}]} />
-                <MenuItem title="Consultations" links={[{url: '/consultations/new', name: 'new'}, {url: '/consultations', name: 'List'}]} />
-                <MenuItem title="Resultat Consult." links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                <MenuItem title="Hospitalization" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                <MenuItem title="Rooms" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
-                <MenuItem title="Personnel" links={[{url: '/personnel/new', name: 'new'}, {url: '/personnel/list', name: 'List'}]} />
+                    <MenuItems />
                 </ul>
             </div>
             </div>
