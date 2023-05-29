@@ -28,6 +28,11 @@ type Doctor = {
         name: string
     }
 }
+export type Room = {
+    id: number,
+    number: number,
+    beds: number
+}
 export type Pagination = {
     actual_Page: number,
     total_Page: number
@@ -114,6 +119,21 @@ export type AppointmentType = {
     doctor: Doctor,
     status: number,
     date: string,
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
+}
+
+export type HospitalizationType = {
+    id: number,
+    status: number,
+    type: string,
+    startDate: string,
+    endDate: string,
+    patient: Patient,
+    room: Room | null,
+    description: string,
     created_by: createdUpdatedBy,
     created_at: string,
     updated_by: createdUpdatedBy,
