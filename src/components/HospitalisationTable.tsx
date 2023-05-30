@@ -73,10 +73,10 @@ const HospitalisationTable = ({columns, entities, page, pagination, handle_click
                             </td>
                             <td className="px-6 py-4">
                                 <div className="flex gap-3">
-                                    <Link to={`/rendezvous/show/${entity.id}`} className="transition-all hover:scale-150">
+                                    <Link to={`/hospitalisations/show/${entity.id}`} className="transition-all hover:scale-150">
                                         <FontAwesomeIcon icon={faEye}/>
                                     </Link>
-                                    <Link to={`/rendezvous/edit/${entity.id}`} className="transition-all hover:scale-150">
+                                    <Link to={`/hospitalisations/edit/${entity.id}`} className="transition-all hover:scale-150">
                                         <FontAwesomeIcon icon={faPencil}/>
                                     </Link>
                                     <a onClick={() => handle_click(entity.id)} className="transition-all hover:scale-150">

@@ -22,7 +22,6 @@ const New = (props: Props) => {
     const [sumbiting, setSubmiting] = useState<boolean>(false)
     const [rooms, set_rooms] = useState<Array<{value: number, label: string}>>()
     const [patients, set_patients] = useState<Array<{value: number, label: string}>>()
-    const [sub_type, set_sub_type] = useState<Array<{value: string, label: string}>>([])
     useEffect(() => {
         axios.get('/rooms')
             .then(response => {

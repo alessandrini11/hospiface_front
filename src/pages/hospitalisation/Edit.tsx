@@ -1,37 +1,38 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
-import { AppointmentType, PersonnelType } from '../../entityPropsType';
-import AppointmentModel from '../../model/Appointment.model';
 import { Controller, useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
+import HospitalizationModel from '../../model/Hospitalization.model';
+import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import { HospitalizationType, RoomType } from '../../entityPropsType';
+import { hospitalisation_status, hospitalisation_type, messages } from '../../utils/constants';
 import Alert from '../../components/Alert';
-import { appointment_status, messages } from '../../utils/constants';
 import Select from 'react-select'
 import Input from '../../components/Ui/Input';
 import SubmitButton from '../../components/Ui/SubmitButton';
+
 type Props = {}
 
 const Edit = (props: Props) => {
-    const { register, reset, handleSubmit, control, formState:{ errors } } = useForm({
-        resolver: yupResolver(AppointmentModel)
+    const { register, handleSubmit, reset, control, formState:{ errors } } = useForm({
+        resolver: yupResolver(HospitalizationModel)
     });
     const navigate = useNavigate()
-    const {appointmentId} = useParams()
+    const {hospitalisationId} = useParams()
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [sumbiting, setSubmiting] = useState<boolean>(false)
-    const [doctors, set_doctors] = useState<Array<{value: number, label: string}>>()
+    const [rooms, set_rooms] = useState<Array<{value: number, label: string}>>()
     const [patients, set_patients] = useState<Array<{value: number, label: string}>>()
-
     useEffect(() => {
-        axios.get(`/appointments/${appointmentId}`)
+        axios.get(`/hospitalizations/${hospitalisationId}`)
             .then((response) => {
-                const data: AppointmentType = response.data.data
+                const data: HospitalizationType = response.data.data
                 const appointment = {
                     ...data,
                     patient: data.patient.id,
-                    doctor: data.doctor.id,
-                    date: `${new Date(data.date).getFullYear()}-${new Date(data.date).getMonth() > 8 + 1 ? new Date(data.date).getMonth() > 9 : `0${new Date(data.date).getMonth() + 1}` }-${new Date(data.date).getDay() > 9 ? new Date(data.date).getDay() : `0${new Date(data.date).getDay() + 1}`}`
+                    room: data.room?.id,
+                    startDate: `${new Date(data.startDate).getFullYear()}-${new Date(data.startDate).getMonth() > 8 + 1 ? new Date(data.startDate).getMonth() > 9 : `0${new Date(data.startDate).getMonth() + 1}` }-${new Date(data.startDate).getDay() > 9 ? new Date(data.startDate).getDay() : `0${new Date(data.startDate).getDay() + 1}`}`,
+                    endDate: `${new Date(data.endDate).getFullYear()}-${new Date(data.endDate).getMonth() > 8 + 1 ? new Date(data.endDate).getMonth() > 9 : `0${new Date(data.endDate).getMonth() + 1}` }-${new Date(data.endDate).getDay() > 9 ? new Date(data.endDate).getDay() : `0${new Date(data.endDate).getDay() + 1}`}`,
                 }
                 reset(appointment)
             })
@@ -42,16 +43,14 @@ const Edit = (props: Props) => {
                     setErrorMessage(error.message)
                 }
             })
-        axios.get('/personnels')
+        axios.get('/rooms')
             .then(response => {
-                const doctorsArr: Array<{label: string, value: number}>=[]
-                const doctor: PersonnelType[] = response.data.data.data.filter((personnel: PersonnelType) =>  (
-                    personnel.subType === "doctor" 
-                ))
-                doctor.forEach(doc => {
-                    doctorsArr.push({value: doc.id, label: `${doc.title} ${doc.firstName} ${doc.lastName}`})
+                const roomsArr: Array<{label: string, value: number}>=[]
+                const rooms: RoomType[] = response.data.data.data
+                rooms.forEach(room => {
+                    roomsArr.push({value: room.id, label: `${room.number}`})
                 })
-                set_doctors(doctorsArr)
+                set_rooms(roomsArr)
             })
         axios.get('/patients')
             .then(response => {
@@ -61,14 +60,14 @@ const Edit = (props: Props) => {
                 })
                 set_patients(patientsArr)
             })
-    }, [appointmentId])
+    }, [hospitalisationId])
     const onSubmit = (body: any): void => {
         setSubmiting(true)
-        axios.put(`/appointments/${appointmentId}`, body)
+        axios.put(`/hospitalizations/${hospitalisationId}`, body)
             .then(response => {
                 if(response.status === 200){
-                    localStorage.setItem('appointments', messages.updated)
-                    navigate('/rendezvous')
+                    localStorage.setItem('hospitalizations', messages.updated)
+                    navigate('/hospitalisations')
                 }
             })
             .catch(error => {
@@ -84,23 +83,6 @@ const Edit = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
-                <div className="">
-                    <label htmlFor="doctor" className="block mb-2 text-sm font-medium text-gray-900">Médécin</label>
-                        <Controller
-                            name="doctor"
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { onChange, value, name, ref } }) => (
-                                <Select
-                                    value={doctors?.find((c) => c.value === value)}
-                                    onChange={value => onChange(value?.value)}
-                                    options={doctors}
-                                    ref={ref}
-                                    name={name}
-                                />
-                            )}
-                        />
-                </div>
                 <div className="">
                     <label htmlFor="patient" className="block mb-2 text-sm font-medium text-gray-900">Patient</label>
                         <Controller
@@ -119,7 +101,38 @@ const Edit = (props: Props) => {
                         />
                 </div>
                 <div className="">
-                    <Input input_label="date rendez-vous" input_name="date" input_type="date" register={register} error_field={errors.date?.message} />
+                    <label htmlFor="room" className="block mb-2 text-sm font-medium text-gray-900">Chambre</label>
+                        <Controller
+                            name="room"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { onChange, value, name, ref } }) => (
+                                <Select
+                                    value={rooms?.find((c) => c.value === value)}
+                                    onChange={value => onChange(value?.value)}
+                                    options={rooms}
+                                    ref={ref}
+                                    name={name}
+                                />
+                            )}
+                        />
+                </div>
+                <div className="">
+                    <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900">Type</label>
+                        <Controller
+                            name="type"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field: { onChange, value, name, ref } }) => (
+                                <Select
+                                    value={hospitalisation_type.find((c) => c.value === value)}
+                                    onChange={value => onChange(value?.value)}
+                                    options={hospitalisation_type}
+                                    ref={ref}
+                                    name={name}
+                                />
+                            )}
+                        />
                 </div>
                 <div className="">
                     <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status</label>
@@ -129,9 +142,9 @@ const Edit = (props: Props) => {
                             rules={{ required: true }}
                             render={({ field: { onChange, value, name, ref } }) => (
                                 <Select
-                                    value={appointment_status.find((c) => c.value === value)}
+                                    value={hospitalisation_status.find((c) => c.value === value)}
                                     onChange={value => onChange(value?.value)}
-                                    options={appointment_status}
+                                    options={hospitalisation_status}
                                     ref={ref}
                                     name={name}
                                 />
@@ -139,7 +152,16 @@ const Edit = (props: Props) => {
                         />
                 </div>
                 <div className="">
-                    <SubmitButton submiting={sumbiting} label="enregistrer"/>
+                    <Input input_label="date début" input_name="startDate" input_type="date" register={register} error_field={errors.startDate?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="date date fin" input_name="endDate" input_type="date" register={register} error_field={errors.endDate?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="description" input_name="description" input_type="text" register={register} error_field={errors.startDate?.message} />
+                </div>
+                <div className="">
+                    <SubmitButton submiting={sumbiting} label="modifier"/>
                 </div>
             </form>
         </>
