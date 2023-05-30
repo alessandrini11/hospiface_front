@@ -78,7 +78,6 @@ export const messages = {
     created: 'Créé avec Success',
     updated: 'Modifié avec Success',
     deleted: 'Supprimé avec Success',
-
 }
 export const medical_exam = [
     {value: 'radio', label: 'radio'},

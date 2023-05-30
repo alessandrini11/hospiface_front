@@ -59,7 +59,7 @@ const RoomTable = ({columns, entities, page, pagination, handle_click}: Props) =
                     </td>
                     <td className="px-6 py-4">
                         <div className="flex gap-3">
-                            <Link to={`/consultations/edit/${entity.id}`} className="transition-all hover:scale-150">
+                            <Link to={`/chambres/edit/${entity.id}`} className="transition-all hover:scale-150">
                                 <FontAwesomeIcon icon={faPencil}/>
                             </Link>
                             <a onClick={() => handle_click(entity.id)} className="transition-all hover:scale-150">
