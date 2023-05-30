@@ -9,23 +9,27 @@ import DrugRoutes from "./routes/DrugRoutes"
 import AppointmentRoutes from "./routes/AppointmentRoutes"
 import HospitalisationRoutes from "./routes/HospitalisationRoutes"
 import RoomRoutes from "./routes/RoomRoutes"
+import ServiceRoutes from "./routes/ServiceRoutes"
 
 function App() {
 
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/patients/*" element={<PatientRoutes />}></Route>
-        <Route path="/personnel/*" element={<PersonnelRoutes />}></Route>
-        <Route path="/consultations/*" element={<ConsulationRoutes />}></Route>
-        <Route path="/medicalexam/*" element={<MedicalExamRoutes />}></Route>
-        <Route path="/drug/*" element={<DrugRoutes />}></Route>
-        <Route path="/rendezvous/*" element={<AppointmentRoutes />}></Route>
-        <Route path="/hospitalisations/*" element={<HospitalisationRoutes />}></Route>
-        <Route path="/chambres/*" element={<RoomRoutes />}></Route>
-    </Routes>
-    </Layout>
+    <>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/patients/*" element={<PatientRoutes />}></Route>
+          <Route path="/personnel/*" element={<PersonnelRoutes />}></Route>
+          <Route path="/consultations/*" element={<ConsulationRoutes />}></Route>
+          <Route path="/medicalexam/*" element={<MedicalExamRoutes />}></Route>
+          <Route path="/drug/*" element={<DrugRoutes />}></Route>
+          <Route path="/rendezvous/*" element={<AppointmentRoutes />}></Route>
+          <Route path="/hospitalisations/*" element={<HospitalisationRoutes />}></Route>
+          <Route path="/chambres/*" element={<RoomRoutes />}></Route>
+          <Route path="/services/*" element={<ServiceRoutes />}></Route>
+        </Routes>
+      </Layout>
+    </>
   )
 }
 

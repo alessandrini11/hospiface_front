@@ -28,6 +28,12 @@ type Doctor = {
         name: string
     }
 }
+type PersonnelServiceType = {
+    id: number,
+    service: ServiceType,
+    personnel: PersonnelType,
+    positionHeld: string
+}
 export type RoomType = {
     id: number,
     number: number,
@@ -138,6 +144,16 @@ export type HospitalizationType = {
     patient: Patient,
     room: RoomType | null,
     description: string,
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
+}
+
+export type ServiceType = {
+    id: number,
+    name: string,
+    personnel_service: PersonnelServiceType[],
     created_by: createdUpdatedBy,
     created_at: string,
     updated_by: createdUpdatedBy,

@@ -18,7 +18,7 @@ const New = (props: Props) => {
         resolver: yupResolver(HospitalizationModel)
     });
     const navigate = useNavigate()
-    const [errorMessage, setErrorMessage] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [sumbiting, setSubmiting] = useState<boolean>(false)
     const [rooms, set_rooms] = useState<Array<{value: number, label: string}>>()
     const [patients, set_patients] = useState<Array<{value: number, label: string}>>()
