@@ -110,3 +110,4 @@ export const personnel_columns = ['nom', 'type', 'sous type', 'poste occupé', '
 export const consultation_columns = ['patient', 'medecin', 'type', 'statut', 'taille(m)', 'poids(kg)', 'température(celcius)', 'tension_artérielle(mm/hg)', 'examen_médical', 'prescription_méd.', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
 export const appointment_columns = ['patient', 'médécin', 'date', 'status',  'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
 export const hospitalisation_columns = ['patient', 'chambre', 'type', 'status', 'date début', 'date fin', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
+export const room_columns = ['Numéro chambre', 'capacité (lits)','créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']

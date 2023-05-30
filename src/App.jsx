@@ -8,6 +8,7 @@ import MedicalExamRoutes from "./routes/MedicalExamRoutes"
 import DrugRoutes from "./routes/DrugRoutes"
 import AppointmentRoutes from "./routes/AppointmentRoutes"
 import HospitalisationRoutes from "./routes/HospitalisationRoutes"
+import RoomRoutes from "./routes/RoomRoutes"
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/drug/*" element={<DrugRoutes />}></Route>
         <Route path="/rendezvous/*" element={<AppointmentRoutes />}></Route>
         <Route path="/hospitalisations/*" element={<HospitalisationRoutes />}></Route>
+        <Route path="/chambres/*" element={<RoomRoutes />}></Route>
     </Routes>
     </Layout>
   )

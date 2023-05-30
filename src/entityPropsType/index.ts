@@ -31,7 +31,11 @@ type Doctor = {
 export type RoomType = {
     id: number,
     number: number,
-    beds: number
+    beds: number,
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
 }
 export type Pagination = {
     actual_Page: number,
