@@ -104,10 +104,16 @@ export const hospitalisation_type = [
     {value: 'intensive care', label: 'soins intensif'},
     {value: 'surgical recovery', label: 'post opération'}
 ]
+export const position_held = [
+    {value: 'chef service', label: 'chef service'},
+    {value: 'chef equipe', label: 'chef équipe'},
+    {value: 'chef section', label: 'chef section'}
+]
 export const patient_columns = ['noms', 'sexe', 'groupe sanguain', 'telephone', 'email', 'address', 'personne urgence', 'numéro urgence', 'statut', 'consultation', 'hospitalisation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const personnel_columns = ['nom', 'type', 'sous type', 'poste occupé', ' spécialité', 'sexe', 'blood group', 'telephone', 'email', 'address', 'statut', 'consultation', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'action']
 export const consultation_columns = ['patient', 'medecin', 'type', 'statut', 'taille(m)', 'poids(kg)', 'température(celcius)', 'tension_artérielle(mm/hg)', 'examen_médical', 'prescription_méd.', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
 export const appointment_columns = ['patient', 'médécin', 'date', 'status',  'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
 export const hospitalisation_columns = ['patient', 'chambre', 'type', 'status', 'date début', 'date fin', 'créé_le', 'créé_par', 'mise_à_jour_le', 'mise_à_jour_par', 'action']
 export const room_columns = ['Numéro chambre', 'capacité (lits)','créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
-export const service_columns = ['name', 'personnel','créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
+export const service_columns = ['name', 'personnel', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
+export const affectation_columns = ['personnel', 'service', 'poste occupé', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']

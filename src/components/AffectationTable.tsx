@@ -1,14 +1,13 @@
 import React from 'react'
-import Pagination from './Pagination'
-import { AppointmentType } from '../entityPropsType'
-import { appointment_status } from '../utils/constants'
+import { PersonnelServiceType } from '../entityPropsType'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
+import Pagination from './Pagination'
 
 type Props = {
     columns: Array<string>,
-    entities: AppointmentType[],
+    entities: PersonnelServiceType[],
     page: string | null,
     pagination: {
       actual_Page: number,
@@ -17,8 +16,7 @@ type Props = {
     handle_click: (id: number) => void
 }
 
-const AppointmentTable = ({columns, entities, page, pagination, handle_click}: Props) => {
-
+const AffectationTable = ({columns, entities, page, pagination, handle_click}: Props) => {
     return (
         <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -42,16 +40,13 @@ const AppointmentTable = ({columns, entities, page, pagination, handle_click}: P
                         <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td className="px-3 py-2">{index + 1}</td>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                { entity.patient?.first_name + ' ' + entity.patient?.last_name}
+                                { entity.personnel.title + ' ' + entity.personnel.firstName + ' ' + entity.personnel.lastName}
                             </th>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                { entity.doctor?.title + ' ' + entity.doctor?.first_name + ' ' + entity.doctor?.last_name}
+                                { entity.service.name}
                             </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap">
-                                {new Date(entity.date).toDateString()}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap">
-                                {appointment_status.find(c => (c.value === entity.status))?.label}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                { entity.positionHeld}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 {(new Date(entity.created_at)).toDateString()}
@@ -59,7 +54,7 @@ const AppointmentTable = ({columns, entities, page, pagination, handle_click}: P
                             <td className="px-6 py-4 whitespace-nowrap">
                                 {entity.created_by && entity.created_by.firstname + ' ' +entity.created_by.lastname}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 whitespace-nowrap">
                             {entity.updated_at && (new Date(entity.updated_at)).toDateString()}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
@@ -67,10 +62,7 @@ const AppointmentTable = ({columns, entities, page, pagination, handle_click}: P
                             </td>
                             <td className="px-6 py-4">
                                 <div className="flex gap-3">
-                                    <Link to={`/rendezvous/show/${entity.id}`} className="transition-all hover:scale-150">
-                                        <FontAwesomeIcon icon={faEye}/>
-                                    </Link>
-                                    <Link to={`/rendezvous/edit/${entity.id}`} className="transition-all hover:scale-150">
+                                    <Link to={`/affectations/edit/${entity.id}`} className="transition-all hover:scale-150">
                                         <FontAwesomeIcon icon={faPencil}/>
                                     </Link>
                                     <a onClick={() => handle_click(entity.id)} className="transition-all hover:scale-150">
@@ -89,4 +81,4 @@ const AppointmentTable = ({columns, entities, page, pagination, handle_click}: P
     )
 }
 
-export default AppointmentTable
+export default AffectationTable

@@ -28,11 +28,15 @@ type Doctor = {
         name: string
     }
 }
-type PersonnelServiceType = {
+export type PersonnelServiceType = {
     id: number,
     service: ServiceType,
     personnel: PersonnelType,
-    positionHeld: string
+    positionHeld: string,
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
 }
 export type RoomType = {
     id: number,
