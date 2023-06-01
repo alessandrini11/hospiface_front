@@ -123,3 +123,4 @@ export const room_columns = ['Numéro chambre', 'capacité (lits)','créé le', 
 export const service_columns = ['name', 'personnel', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
 export const affectation_columns = ['personnel', 'service', 'poste occupé', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
 export const garde_columns = ['début', 'fin', 'status', 'personnel', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
+export const user_columns = ['nom', 'sex', 'email', 'telephone', 'créé le', 'mise à jour le', 'actions']

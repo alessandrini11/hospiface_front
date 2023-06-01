@@ -13,6 +13,7 @@ import ServiceRoutes from "./routes/ServiceRoutes"
 import AffectationRoutes from "./routes/AffectationRoutes"
 import GardesRoutes from "./routes/GardesRoutes"
 import PersonnelGardeRoutes from "./routes/PersonnelGardeRoutes"
+import UserRoutes from "./routes/UserRoutes"
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/affectations/*" element={<AffectationRoutes />}></Route>
           <Route path="/gardes/*" element={<GardesRoutes />} />
           <Route path="/personnel_garde/*" element={<PersonnelGardeRoutes />} />
+          <Route path="/users/*" element={<UserRoutes />} />
         </Routes>
       </Layout>
     </>

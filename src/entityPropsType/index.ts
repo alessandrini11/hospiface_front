@@ -1,4 +1,4 @@
-type createdUpdatedBy = {
+export type createdUpdatedBy = {
     id: number,
     firstname: string,
     lastname: string,
@@ -6,8 +6,9 @@ type createdUpdatedBy = {
     phoneNumber: string,
     email: string,
     roles: Array<string>,
-    status: number
-
+    status: number,
+    created_at: string,
+    updated_at: string
 }
 type Patient = {
     id: number,
