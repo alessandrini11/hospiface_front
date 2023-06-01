@@ -52,50 +52,49 @@ const New = (props: Props) => {
         })
     })
     }
-    console.log(drugs)
     return (
         <>
-        { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <div className="">
-                <ul>
-                {drugs?.map((drug, index) => (
-                    <li key={index}>
-                    <span>numéro: {index + 1}</span>
-                    <span>Name: </span> {drug.name}
-                    <span>Dosage: </span> {drug.dosage}
-                    <span className="cursor-pointer" onClick={() => delete_drug(index)}><FontAwesomeIcon className="text-red-500" icon={faTrash} /></span>
-                    </li>
-                ))}
-                </ul>
-            </div>
-            <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+            { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <div className="">
-                    <Input input_label="nom" input_name="name" input_type="text" register={register} error_field={errors.name?.message} />
+                    <ul>
+                    {drugs?.map((drug, index) => (
+                        <li key={index}>
+                        <span>numéro: {index + 1}</span>
+                        <span>Name: </span> {drug.name}
+                        <span>Dosage: </span> {drug.dosage}
+                        <span className="cursor-pointer" onClick={() => delete_drug(index)}><FontAwesomeIcon className="text-red-500" icon={faTrash} /></span>
+                        </li>
+                    ))}
+                    </ul>
                 </div>
-                <div className="">
-                    <label htmlFor="dosage" className="block mb-2 text-sm font-medium text-gray-900">Posologie</label>
-                        <Controller
-                            name="dosage"
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { onChange, value, name, ref } }) => (
-                                <Select
-                                    value={drug_dosage.find((c) => c.value === value)}
-                                    onChange={value => onChange(value?.value)}
-                                    options={drug_dosage}
-                                    ref={ref}
-                                    name={name}
-                                />
-                            )}
-                        />
+                <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="">
+                        <Input input_label="nom" input_name="name" input_type="text" register={register} error_field={errors.name?.message} />
+                    </div>
+                    <div className="">
+                        <label htmlFor="dosage" className="block mb-2 text-sm font-medium text-gray-900">Posologie</label>
+                            <Controller
+                                name="dosage"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field: { onChange, value, name, ref } }) => (
+                                    <Select
+                                        value={drug_dosage.find((c) => c.value === value)}
+                                        onChange={value => onChange(value?.value)}
+                                        options={drug_dosage}
+                                        ref={ref}
+                                        name={name}
+                                    />
+                                )}
+                            />
+                    </div>
+                <div className="flex justify-between gap-5">
+                    <button disabled={sumbiting} onClick={create_drug} type="button" className="w-full lg:w-fit text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Ajouter à la liste</button>
+                    <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
-            <div className="flex justify-between gap-5">
-                <button disabled={sumbiting} onClick={create_drug} type="button" className="w-full lg:w-fit text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Ajouter à la liste</button>
-                <SubmitButton submiting={sumbiting} label="enregistrer"/>
+            </form>
             </div>
-        </form>
-        </div>
         </>
     )
 }

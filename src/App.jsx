@@ -12,6 +12,7 @@ import RoomRoutes from "./routes/RoomRoutes"
 import ServiceRoutes from "./routes/ServiceRoutes"
 import AffectationRoutes from "./routes/AffectationRoutes"
 import GardesRoutes from "./routes/GardesRoutes"
+import PersonnelGardeRoutes from "./routes/PersonnelGardeRoutes"
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/services/*" element={<ServiceRoutes />}></Route>
           <Route path="/affectations/*" element={<AffectationRoutes />}></Route>
           <Route path="/gardes/*" element={<GardesRoutes />} />
+          <Route path="/personnel_garde/*" element={<PersonnelGardeRoutes />} />
         </Routes>
       </Layout>
     </>

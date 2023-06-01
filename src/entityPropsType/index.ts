@@ -35,6 +35,12 @@ export type PersonnelGardeType = {
     startDate: Date,
     endDate: Date
 }
+export type PG = {
+    personnel: string,
+    service: string,
+    startDate: Date,
+    endDate: Date
+}
 export type PersonnelServiceType = {
     id: number,
     service: ServiceType,
@@ -175,7 +181,7 @@ export type GardeType = {
     startDate: Date,
     endDate: Date,
     status: number,
-    personnel: PersonnelGardeType[],
+    personnel_garde: PersonnelGardeType[],
     created_by: createdUpdatedBy,
     created_at: string,
     updated_by: createdUpdatedBy,
