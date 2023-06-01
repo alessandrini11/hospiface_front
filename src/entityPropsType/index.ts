@@ -28,6 +28,13 @@ type Doctor = {
         name: string
     }
 }
+export type PersonnelGardeType = {
+    id: number,
+    personnel: PersonnelType,
+    service: ServiceType,
+    startDate: Date,
+    endDate: Date
+}
 export type PersonnelServiceType = {
     id: number,
     service: ServiceType,
@@ -158,6 +165,17 @@ export type ServiceType = {
     id: number,
     name: string,
     personnel_service: PersonnelServiceType[],
+    created_by: createdUpdatedBy,
+    created_at: string,
+    updated_by: createdUpdatedBy,
+    updated_at: string
+}
+export type GardeType = {
+    id: number,
+    startDate: Date,
+    endDate: Date,
+    status: number,
+    personnel: PersonnelGardeType[],
     created_by: createdUpdatedBy,
     created_at: string,
     updated_by: createdUpdatedBy,

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
-import {ConsultationType, Pagination} from '../../entityPropsType/index'
-import Spinner from '../../components/Ui/Spinner'
-import { messages, consultation_columns } from '../../utils/constants'
 import { useSearchParams } from 'react-router-dom'
+import { GardeType, Pagination } from '../../entityPropsType'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import ConsultationTable from '../../components/ConsultationTable'
+import { garde_columns, messages } from '../../utils/constants'
+import Spinner from '../../components/Ui/Spinner'
+import Alert from '../../components/Alert'
+import CardContainer from '../../components/Cards/CardContainer'
+import AddButton from '../../components/Ui/AddButton'
+import GardesTable from '../../components/GardesTable'
+
 type Props = {}
 
 const Index = (props: Props) => {
@@ -17,14 +17,13 @@ const Index = (props: Props) => {
     const [created_message, set_created_message] = useState<string | null>(null)
     const [error_message, set_error_message] = useState(null)
     const [pagination, set_pagination] = useState<Pagination | null>(null)
-    const [personnel, set_personnel] = useState<ConsultationType[] | null>(null)
+    const [gardes, set_gardes] = useState<GardeType[] | null>(null)
     const [page, set_page] = useState<string | null>(search_params.get('page'))
-    const [query, setQuery] = useState(search_params.get('query'))
 
     useEffect(() => {
-        axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
+        axios.get(`/gardes?actualPage=${page || 1}`)
             .then(response => {
-                set_personnel(response.data.data.data)
+                set_gardes(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,
                     total_Page: response.data.data.totalPages
@@ -33,13 +32,13 @@ const Index = (props: Props) => {
             .catch(error => {
                 set_error_message(error.message)
             })
-        if(localStorage.getItem('consultations')){
-            set_created_message(localStorage.getItem('consultations'))
+        if(localStorage.getItem('gardes')){
+            set_created_message(localStorage.getItem('gardes'))
         }
         return () => {
-            localStorage.removeItem('consultations')
+            localStorage.removeItem('gardes')
         }
-    }, [page, query])
+    }, [page])
 
     const handle_click = (id: number): void => {
         Swal.fire({
@@ -61,8 +60,8 @@ const Index = (props: Props) => {
                         })
                         .then(result => {
                             if(result.isConfirmed){
-                                localStorage.setItem('personnel', messages.deleted)
-                                window.location.href = "/personnels"
+                                localStorage.setItem('gardes', messages.deleted)
+                                window.location.href = "/gardes"
                             }
                         })
                     })
@@ -74,11 +73,11 @@ const Index = (props: Props) => {
             }
         })
     }
-    const data = !personnel ?
+    const data = !gardes ?
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <ConsultationTable handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page={page} />
+    <GardesTable handle_click={handle_click} pagination={pagination} columns={garde_columns} entities={gardes} page={page} />
 
     return (
         <>
@@ -87,12 +86,9 @@ const Index = (props: Props) => {
             
             <CardContainer>
                 <div className="">
-                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
-                        <div className="">
-                            <SearchForm />
-                        </div>
+                    <div className="flex justify-end items-center py-4 flex-wrap space-y-2">
                         <p className="">
-                            <AddButton url="/consultations/new"></AddButton>
+                            <AddButton url="/gardes/new"></AddButton>
                         </p>
                     </div>
                     {data}

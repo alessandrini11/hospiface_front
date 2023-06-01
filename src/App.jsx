@@ -11,6 +11,7 @@ import HospitalisationRoutes from "./routes/HospitalisationRoutes"
 import RoomRoutes from "./routes/RoomRoutes"
 import ServiceRoutes from "./routes/ServiceRoutes"
 import AffectationRoutes from "./routes/AffectationRoutes"
+import GardesRoutes from "./routes/GardesRoutes"
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/chambres/*" element={<RoomRoutes />}></Route>
           <Route path="/services/*" element={<ServiceRoutes />}></Route>
           <Route path="/affectations/*" element={<AffectationRoutes />}></Route>
+          <Route path="/gardes/*" element={<GardesRoutes />} />
         </Routes>
       </Layout>
     </>

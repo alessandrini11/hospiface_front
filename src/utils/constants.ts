@@ -98,6 +98,11 @@ export const hospitalisation_status = [
     {value: 1, label: 'started'},
     {value: 2, label: 'ended'}
 ]
+export const garde_status = [
+    {value: 0, label: 'programmed'},
+    {value: 1, label: 'started'},
+    {value: 2, label: 'ended'}
+]
 export const hospitalisation_type = [
     {value: 'observation', label: 'observation'},
     {value: 'medical care', label: 'soins médical'},
@@ -117,3 +122,4 @@ export const hospitalisation_columns = ['patient', 'chambre', 'type', 'status', 
 export const room_columns = ['Numéro chambre', 'capacité (lits)','créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
 export const service_columns = ['name', 'personnel', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
 export const affectation_columns = ['personnel', 'service', 'poste occupé', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
+export const garde_columns = ['début', 'fin', 'status', 'personnel', 'créé le', 'créé par', 'mise à jour le', 'mise à jour par', 'actions']
