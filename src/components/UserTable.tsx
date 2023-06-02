@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Pagination from '../components/Pagination'
+import { user_status } from '../utils/constants'
 type Props = {
     columns: Array<string>,
     entities: createdUpdatedBy[],
@@ -46,8 +47,14 @@ const UserTable = ({columns, entities, page, pagination, handle_click}: Props) =
                         <td className="px-6 py-4 whitespace-nowrap">
                             {entity.email}
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.phonenumber}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            {entity.roles.includes('ROLE_SUPER_ADMIN') ? 'super admin' : 'admin'}
+                        </td>
                         <td className="px-6 py-4 text-center whitespace-nowrap">
-                            {entity.phoneNumber}
+                            {user_status.find(status => status.value === entity.status)?.label}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             {(new Date(entity.created_at)).toDateString()}

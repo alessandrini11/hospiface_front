@@ -88,7 +88,7 @@ const Index = () => {
                             <SearchForm />
                         </div>
                         <p className="">
-                            <AddButton url="/chambres/new"></AddButton>
+                            <AddButton url="/users/new"></AddButton>
                         </p>
                     </div>
                     {data}

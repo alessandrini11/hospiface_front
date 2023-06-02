@@ -3,7 +3,7 @@ export type createdUpdatedBy = {
     firstname: string,
     lastname: string,
     sex: string,
-    phoneNumber: string,
+    phonenumber: string,
     email: string,
     roles: Array<string>,
     status: number,
