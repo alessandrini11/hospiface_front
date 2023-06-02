@@ -15,6 +15,7 @@ const MenuItems = (props: Props) => {
       <MenuItem title="Service" links={[{url: '/services/new', name: 'new'}, {url: '/services', name: 'List'}]} />
       <MenuItem title="Affectation" links={[{url: '/affectations/new', name: 'new'}, {url: '/affectations', name: 'List'}]} />
       <MenuItem title="Tour de garde" links={[{url: '/gardes/new', name: 'new'}, {url: '/gardes', name: 'List'}]} />
+      <MenuItem title="Utilisateurs" links={[{url: '/users/new', name: 'new'}, {url: '/users', name: 'List'}]} />
     </>
   )
 }

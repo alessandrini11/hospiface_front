@@ -1,12 +1,12 @@
 import React from 'react'
 
-const CardChart = (props) => {
+const CardChart = ({name, children}) => {
     return (
         <div className="bg-white p-5">
             <div className="">
-                <h1>Consultations</h1>
+                <h1>{name}</h1>
             </div>
-            {props.children}
+            {children}
         </div>
     )
 }

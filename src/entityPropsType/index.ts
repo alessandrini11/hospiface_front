@@ -188,3 +188,9 @@ export type GardeType = {
     updated_by: createdUpdatedBy,
     updated_at: string
 }
+
+// export type ChartDataType = {
+//     labels: string[],
+//     datas: number[],
+//     name: string
+// }

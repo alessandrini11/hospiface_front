@@ -14,11 +14,15 @@ import AffectationRoutes from "./routes/AffectationRoutes"
 import GardesRoutes from "./routes/GardesRoutes"
 import PersonnelGardeRoutes from "./routes/PersonnelGardeRoutes"
 import UserRoutes from "./routes/UserRoutes"
+import Login from "./pages/Login"
 
 function App() {
 
   return (
     <>
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+      </Routes>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />}></Route>

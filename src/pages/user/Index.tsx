@@ -38,7 +38,6 @@ const Index = () => {
             localStorage.removeItem('users')
         }
     }, [page, query])
-    console.log(users)
     const handle_click = (id: number): void => {
         Swal.fire({
             title: 'Voulez vous supprimer ?',

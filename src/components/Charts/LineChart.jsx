@@ -22,17 +22,17 @@ ChartJS.register(
     Legend
   );
 
-const LineChart = () => {
+const LineChart = ({entity, name, onChange}) => {
     const options = {
         responsive: true,
     }
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const labels = entity.labels
     const data = {
         labels,
         datasets: [
           {
-            label: 'Patient',
-            data: labels.map(() => faker.number.int({ min: 0, max: 2500 })),
+            label: 'C',
+            data: entity.datas,
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
@@ -40,8 +40,15 @@ const LineChart = () => {
       };
     return (
         <div className="bg-white p-5">
-            <div className="">
-                <h1>Consultations</h1>
+            <div className="flex justify-between">
+                <h1>{entity.name}</h1>
+                <form action="">
+                  <select onChange={(e) => onChange(name, e.target.value)} name="" id="">
+                    <option value="none">None</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                  </select>
+                </form>
             </div>
             <Line options={options} data={data}/>
         </div>
