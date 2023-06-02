@@ -7,7 +7,7 @@ const UserModel = yup.object({
     sex: yup.string().required('le champ est obligatoire'),
     role: yup.string().required('le champ est obligatoire'),
     status: yup.number().required('le champ est obligatoire'),
-    password: yup.string().required('le champ est obligatoire').min(5, 'le mot de passe doit contenir au moins 5 charactères')
+    password: yup.string()
 })
 
 export default UserModel
