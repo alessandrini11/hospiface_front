@@ -1,6 +1,9 @@
 import React from 'react'
-
-const DateInput = ({input_label, input_name, onChange}) => {
+type Props = {
+  input_label: string,
+  input_name: string
+}
+const DateInput = ({input_label, input_name}) => {
   return (
     <>
         <label htmlFor={input_name}>{input_label}</label>

@@ -1,10 +1,11 @@
 import React from 'react'
+import { FieldError } from 'react-hook-form'
 type Props = {
     input_name: string,
     input_type: string,
     register: any,
     input_label: string,
-    error_field: string | null
+    error_field: any
 }
 const Input = ({input_name, input_type, register, input_label, error_field}: Props) => {
     return (

@@ -10,6 +10,7 @@ import { messages, personnel_columns } from '../../utils/constants'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import URLS from '../../utils/app_urls'
 type Props = {}
 const index = (props: Props) => {
     const [search_params, set_search_params] = useSearchParams()
@@ -76,30 +77,19 @@ const index = (props: Props) => {
         })
     }
     const data = !personnel ?
-    <div className="flex justify-center">
+    <div style={{height: '90%'}} className="d-flex align-items-center justify-content-center">
         <Spinner></Spinner>
-    </div> :
-    <PersonnelTable handle_click={handle_click} pagination={pagination} columns={personnel_columns} entities={personnel} page={page} />
+    </div>  :
+    <PersonnelTable newUrl={URLS.personnel.new} handle_click={handle_click} pagination={pagination} columns={personnel_columns} entities={personnel} page={page} />
 
 
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            
-            <CardContainer>
-                <div className="">
-                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
-                        <div className="">
-                            <SearchForm />
-                        </div>
-                        <p className="">
-                            <AddButton url="/personnel/new"></AddButton>
-                        </p>
-                    </div>
-                    {data}
-                </div>
-            </CardContainer>
+            <div className="row">
+                {data}
+            </div>
         </>  
     )
 }

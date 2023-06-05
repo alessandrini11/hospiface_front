@@ -79,6 +79,7 @@ const Edit = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifier un membre du personnel</h2>
                 <div className="">
                     <Input input_label="nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
                 </div>
@@ -234,7 +235,7 @@ const Edit = (props: Props) => {
                         )}
                     />
                 </div>
-                <div className="">
+                <div className="row mt-2">
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>

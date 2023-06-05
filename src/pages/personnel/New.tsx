@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Alert from '../../components/Alert'
 import Input from '../../components/Ui/Input'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm} from 'react-hook-form'
 import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
 import { useNavigate } from 'react-router-dom'
@@ -40,6 +40,7 @@ const New = (props: Props) => {
             })
     }, [])
     const onSubmit = (body: any): void => {
+        console.log(body)
         setSubmiting(true)
         const reqBody = {...body, service: [body.service]}
         axios.post('/personnels', body)
@@ -50,7 +51,7 @@ const New = (props: Props) => {
                 }
             })
             .catch(error => {
-                setSubmiting(true)
+                setSubmiting(false)
                 setErrorMessage(error.message)
             })
     }
@@ -58,6 +59,7 @@ const New = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Enregistrer un membre du personnel</h2>
                 <div className="">
                     <Input input_label="nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
                 </div>
@@ -157,11 +159,11 @@ const New = (props: Props) => {
                             rules={{ required: true }}
                             render={({ field: { onChange, value, name, ref } }) => (
                                 <ReactSelect
-                                value={blood_groups.find((c) => c.value === value)}
-                                onChange={value => onChange(value?.value)}
-                                options={blood_groups}
-                                ref={ref}
-                                name={name}
+                                    value={blood_groups.find((c) => c.value === value)}
+                                    onChange={value => onChange(value?.value)}
+                                    options={blood_groups}
+                                    ref={ref}
+                                    name={name}
                             />
                             )}
                         />
@@ -230,7 +232,7 @@ const New = (props: Props) => {
                         )}
                     />
                 </div>
-                <div className="">
+                <div className="row mt-2">
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>
