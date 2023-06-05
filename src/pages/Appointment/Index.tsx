@@ -7,9 +7,7 @@ import axios from 'axios'
 import { appointment_columns, messages } from '../../utils/constants'
 import Spinner from '../../components/Ui/Spinner'
 import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
+import URLS from '../../utils/app_urls'
 type Props = {}
 
 const Index = (props: Props) => {
@@ -80,26 +78,15 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <AppointmentTable handle_click={handle_click} pagination={pagination} columns={appointment_columns} entities={appointments} page={page} />
+    <AppointmentTable newUrl={URLS.appointment.new} handle_click={handle_click} pagination={pagination} columns={appointment_columns} entities={appointments} page={page} />
 
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            
-            <CardContainer>
-                <div className="">
-                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
-                        <div className="">
-                            <SearchForm />
-                        </div>
-                        <p className="">
-                            <AddButton url="/rendezvous/new"></AddButton>
-                        </p>
-                    </div>
-                    {data}
-                </div>
-            </CardContainer>
+            <div className="row">
+                {data}
+            </div>
         </>
     )
 }

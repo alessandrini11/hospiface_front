@@ -39,6 +39,7 @@ const New = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Enregistrez une chambre</h2>
                 <div className="">
                     <Input input_label="numéro chambre" input_name="number" input_type="number" register={register} error_field={errors.number?.message} />
                 </div>

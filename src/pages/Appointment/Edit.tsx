@@ -84,6 +84,7 @@ const Edit = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifier un rendez-vous</h2>
                 <div className="">
                     <label htmlFor="doctor" className="block mb-2 text-sm font-medium text-gray-900">Médécin</label>
                         <Controller

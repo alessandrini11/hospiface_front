@@ -17,7 +17,6 @@ const index = (props: Props) => {
     const [personnel, set_personnel] = useState<PersonnelType[] | null>(null)
     const [page, set_page] = useState<string | null>(search_params.get('page'))
     const [query, setQuery] = useState(search_params.get('query'))
-    const [confirm_delete, set_confirm_delete] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {

@@ -71,7 +71,7 @@ const Edit = (props: Props) => {
                 }
             })
             .catch(error => {
-                setSubmiting(true)
+                setSubmiting(false)
                 if(error.response){
                     setErrorMessage(error.response.data.error.message)
                 }else {
@@ -83,6 +83,7 @@ const Edit = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifier une hospitalisation</h2>
                 <div className="">
                     <label htmlFor="patient" className="block mb-2 text-sm font-medium text-gray-900">Patient</label>
                         <Controller

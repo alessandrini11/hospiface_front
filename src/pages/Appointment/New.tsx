@@ -64,7 +64,7 @@ const New = (props: Props) => {
     return (
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
-            <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+            <form className="row" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
                     <label htmlFor="doctor" className="block mb-2 text-sm font-medium text-gray-900">Médécin</label>
                         <Controller

@@ -27,7 +27,7 @@ const Edit = (props: Props) => {
     }, [roomId])
     const onSubmit = (body: any): void => {
         setSubmiting(true)
-        axios.post('/rooms', body)
+        axios.put(`/rooms/${roomId}`, body)
             .then(response => {
                 if(response.status === 201){
                     localStorage.setItem('rooms', messages.updated)
@@ -47,6 +47,7 @@ const Edit = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifiez une chambre</h2>
                 <div className="">
                     <Input input_label="numéro chambre" input_name="number" input_type="number" register={register} error_field={errors.number?.message} />
                 </div>
