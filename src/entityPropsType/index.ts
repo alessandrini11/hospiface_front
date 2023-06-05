@@ -32,8 +32,8 @@ export type Patient = {
 }
 type Doctor = {
     id: number,
-    first_name: string,
-    last_name: string,
+    firstName: string,
+    lastName: string,
     title: string,
     sex: string,
     speciality: {

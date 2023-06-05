@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
 import {ConsultationType, Pagination} from '../../entityPropsType/index'
 import Spinner from '../../components/Ui/Spinner'
 import { messages, consultation_columns } from '../../utils/constants'
@@ -10,6 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import ConsultationTable from '../../components/ConsultationTable'
+import URLS from '../../utils/app_urls'
 type Props = {}
 
 const Index = (props: Props) => {
@@ -24,6 +22,7 @@ const Index = (props: Props) => {
     useEffect(() => {
         axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
+                console.log(response.data.data)
                 set_personnel(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,
@@ -78,26 +77,15 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <ConsultationTable handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page={page} />
+    <ConsultationTable newUrl={URLS.consultations.new} handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page={page} />
 
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            
-            <CardContainer>
-                <div className="">
-                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
-                        <div className="">
-                            <SearchForm />
-                        </div>
-                        <p className="">
-                            <AddButton url="/consultations/new"></AddButton>
-                        </p>
-                    </div>
-                    {data}
-                </div>
-            </CardContainer>
+            <div className="row">   
+                {data}
+            </div>
         </>
     )
 }

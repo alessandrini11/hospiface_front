@@ -4,6 +4,7 @@ const ROOMS = "chambres"
 const PERSONNEL = "personnel"
 const SERVICE = "Services"
 const USER = "users"
+const APPOINTMENT = "rendezvous"
 const URLS = {
     patient: {
         index: `/${PATIENTS}`,
@@ -13,7 +14,8 @@ const URLS = {
     consultations: {
         index: `/${CONSULTAIONS}`,
         new: `/${CONSULTAIONS}/new`,
-        edit: `/${CONSULTAIONS}/edit`
+        edit: `/${CONSULTAIONS}/edit`,
+        show: `/${CONSULTAIONS}/show`,
     },
     rooms: {
         index: `/${ROOMS}`,
@@ -34,6 +36,11 @@ const URLS = {
         index: `/${USER}`,
         new: `/${USER}/new`,
         edit: `/${USER}/edit`
+    },
+    appointment: {
+        index: `/${APPOINTMENT}`,
+        new: `/${APPOINTMENT}/new`,
+        edit: `/${APPOINTMENT}/edit`
     }
 }
 

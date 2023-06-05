@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
 import {Pagination, PersonnelType} from '../../entityPropsType/index'
 import PersonnelTable from '../../components/PersonnelTable'
 import Spinner from '../../components/Ui/Spinner'
