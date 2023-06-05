@@ -7,7 +7,7 @@ const Navigation = ({page, sub_page}) => {
         <Container>
             <div className="flex justify-between py-2">
                 <div className="">Hospital Dashboard</div>
-                <div className="">Hospital / {page && <span className="">{page}</span>} {sub_page && <span className="">/ {sub_page}</span>} </div>
+                <div className="">Hospital / </div>
             </div>
         </Container>
     </div>

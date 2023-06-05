@@ -29,8 +29,10 @@ const Login = (props: Props) => {
         axios.post('/auth/login_check', body)
             .then(response => {
                 if(response.status === 200){
+                    console.log("executes")
                     localStorage.setItem('token', response.data.token)
                     localStorage.setItem('refresh_token', response.data.refresh_token)
+                    navigate('/')
                 }
             })
             .catch(error => {
