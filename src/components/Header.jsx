@@ -1,6 +1,7 @@
 import React from 'react'
 import LogoLgDark from '../assets/images/logo/logo-dark.png'
 import LogoSm from '../assets/images/logo/logo-sm-1.png'
+import { Link } from 'react-router-dom'
 const Header = () => {
   return (
     <header id="page-topbar">
@@ -8,23 +9,23 @@ const Header = () => {
             <div className="navbar-header">
                 <div className="d-flex">
                     <div className="navbar-brand-box horizontal-logo">
-                        <a href="index.html" className="logo logo-dark">
+                        <Link to="/" className="logo logo-dark">
                             <span className="logo-sm">
                                 <img src={LogoSm} alt="" />
                             </span>
                             <span className="logo-lg">
                                 <img src={LogoLgDark} alt="" />
                             </span>
-                        </a>
+                        </Link>
 
-                        <a href="index.html" className="logo logo-light">
+                        <Link to="/" className="logo logo-light">
                             <span className="logo-sm">
                                 <img src={LogoSm} alt="" />
                             </span>
                             <span className="logo-lg">
                                 <img src={LogoLgDark} alt="" />
                             </span>
-                        </a>
+                        </Link>
                     </div>
 
                     <button type="button" className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
@@ -34,33 +35,9 @@ const Header = () => {
                             <span></span>
                         </span>
                     </button>
-
-                    {/* <form className="app-search d-none d-md-block">
-                        <div className="position-relative">
-                            <input type="text" className="form-control" placeholder="Search..." autoComplete="off" id="search-options"  />
-                            <span className="mdi mdi-magnify search-widget-icon"></span>
-                            <span className="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
-                        </div>
-                    </form> */}
                 </div>
 
                 <div className="d-flex align-items-center">
-
-                    <div className="dropdown d-md-none topbar-head-dropdown header-item">
-                        <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i className="bx bx-search fs-22"></i>
-                        </button>
-                        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
-                            <form className="p-3">
-                                <div className="form-group m-0">
-                                    <div className="input-group">
-                                        <input type="text" className="form-control" placeholder="Search ..." aria-label="Recipient's username" />
-                                        <button className="btn btn-primary" type="submit"><i className="mdi mdi-magnify"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                     <div className="dropdown topbar-head-dropdown ms-1 header-item">
                         <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className='bx bx-category-alt fs-22'></i>

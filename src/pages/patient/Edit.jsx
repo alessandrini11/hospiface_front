@@ -22,7 +22,11 @@ const Edit = () => {
     useEffect(() => {
         axios.get(`/patients/${patientId}`)
             .then(response => {
-                reset(response.data.data)
+                const patient = response.data.data
+                reset({
+                    ...patient,
+                    birthDate: `${new Date(patient.birthDate).getFullYear()}-${new Date(patient.birthDate).getMonth() > 8 + 1 ? new Date(patient.birthDate).getMonth() > 9 : `0${new Date(patient.birthDate).getMonth() + 1}` }-${new Date(patient.birthDate).getDay() > 9 ? new Date(patient.birthDate).getDay() : `0${new Date(patient.birthDate).getDay() + 1}`}`
+                })
             })
             .catch(error => {
                 setErrorMessage(error.message)
@@ -50,7 +54,8 @@ const Edit = () => {
     return (
         <>
             { isError && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
-            <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+            <form className="row" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifiez un patient</h2>
                 <div className="">
                     <Input input_label="nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
                 </div>
@@ -122,7 +127,7 @@ const Edit = () => {
                         )}
                     />
                 </div>
-                <div className="">
+                <div className="row mt-2">
                     <SubmitButton submiting={sumbiting} label="mise à jour"/>
                 </div>
             </form>

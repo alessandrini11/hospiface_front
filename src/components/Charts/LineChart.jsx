@@ -50,7 +50,6 @@ const LineChart = ({entity, name, onChange}) => {
             data: entity.datas,
             borderColor: color,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            fill: true,
             lineTension: 0.5,
             borderColor: color,
             borderCapStyle: 'butt',
@@ -75,7 +74,7 @@ const LineChart = ({entity, name, onChange}) => {
             <div className="d-flex justify-content-between">
                 <p className="text-uppercase fw-medium text-muted text-truncate mb-0">{entity.name}</p>
                 <form action="">
-                  <select onChange={(e) => onChange(name, e.target.value)} name="" id="">
+                  <select className="form-select mb-3" onChange={(e) => onChange(name, e.target.value)} name="" id="">
                     <option value="none">None</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>

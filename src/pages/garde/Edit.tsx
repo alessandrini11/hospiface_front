@@ -63,7 +63,7 @@ const Edit = (props: Props) => {
     return (
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
-            <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+            <form className="row" onSubmit={handleSubmit(onSubmit)}>
                 <div className="">
                     <Input input_label="date début" input_name="startDate" input_type="date" register={register} error_field={errors.startDate?.message} />
                 </div>

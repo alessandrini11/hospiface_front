@@ -10,13 +10,25 @@ export type createdUpdatedBy = {
     created_at: string,
     updated_at: string
 }
-type Patient = {
+export type Patient = {
     id: number,
-    first_name: string,
-    last_name: string,
+    firstName: string,
+    lastName: string,
     sex: string,
-    blood_group: string,
-    birth_date: string
+    phoneNumber: string,
+    email: string,
+    adress: string,
+    emergencyPerson: string,
+    emergencyContact: string,
+    status: number,
+    consultations: ConsultationType[],
+    hospitalizations: HospitalizationType[]
+    bloodGroup: string,
+    birthDate: string,
+    createdBy: createdUpdatedBy,
+    createdAt: string,
+    updatedBy: createdUpdatedBy,
+    updatedAt: string
 }
 type Doctor = {
     id: number,

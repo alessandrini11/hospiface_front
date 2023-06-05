@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Layout from '../../components/Layout'
 import Input from '../../components/Ui/Input'
 import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
@@ -9,17 +8,17 @@ import Patient from '../../model/Patient.model'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Alert from '../../components/Alert'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const New = () => {
     const { register, handleSubmit, control, formState:{ errors } } = useForm({
         resolver: yupResolver(Patient)
     });
     const navigate = useNavigate()
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState(null)
     const [isError, setIsError] = useState(false)
     const [sumbiting, setSubmiting] = useState(false)
     const onSubmit = body => {
-        setSubmiting(false)
+        setSubmiting(true)
         console.log(body)
         axios.post('/patients', body)
             .then(response => {
@@ -30,6 +29,7 @@ const New = () => {
             })
             .catch(error => {
                 setSubmiting(false)
+                console.log(error)
                 if(error.response){
                     setErrorMessage(error.response.data.error.message)
                 }else {
@@ -39,62 +39,66 @@ const New = () => {
     }
     return (
         <>
-            { isError && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
-            <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+            { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
+            <form className="row" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Enregistrez un nouveau patient</h2>
                 <div className="">
-                    <Input input_label="nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
+                    <Input input_label="Nom" input_name="firstName" input_type="text" register={register} error_field={errors.firstName?.message} />
                 </div>
                 <div className="">
-                    <Input input_label="prenom" input_name="lastName" input_type="text" register={register} error_field={errors.lastName?.message} />
+                    <Input input_label="Prenom" input_name="lastName" input_type="text" register={register} error_field={errors.lastName?.message} />
                 </div>
                 <div className="">
-                <label htmlFor="sex" className="block mb-2 text-sm font-medium text-gray-900">Sexe</label>
-                    <Controller
-                        name="sex"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field: { onChange, value, name, ref } }) => (
-                            <ReactSelect
-                                value={sexs.find((c) => c.value === value)}
-                                onChange={value => onChange(value.value)}
-                                options={sexs}
-                                ref={ref}
-                                name={name}
-                            />
-                        )}
-                    />
+                    <label htmlFor="sex" className="block mb-2 text-sm font-medium text-gray-900">Sexe</label>
+                        <Controller
+                                name="sex"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field: { onChange, value, name, ref } }) => (
+                                    <ReactSelect
+                                    value={sexs.find((c) => c.value === value)}
+                                    onChange={value => onChange(value.value)}
+                                    options={sexs}
+                                    ref={ref}
+                                    className={ errors.sex ?  "is-invalid" : ""}
+                                    name={name}
+                                />
+                                )}
+                        />
+                    {errors.sex && <div className="invalid-feedback">{errors.sex.message}</div>}
                 </div>
                 <div className="">
-                    <Input input_label="date de naissance" input_name="birthDate" input_type="date" register={register} error_field={errors.birthDate?.message} />
+                    <Input input_label="Date de naissance" input_name="birthDate" input_type="date" register={register} error_field={errors.birthDate?.message} />
                 </div>
                 <div className="">
-                <label htmlFor="bloodGroup" className="block mb-2 text-sm font-medium text-gray-900">Groupe Sanguain</label>
-                    <Controller
-                            name="bloodGroup"
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field: { onChange, value, name, ref } }) => (
-                                <ReactSelect
-                                value={blood_groups.find((c) => c.value === value)}
-                                onChange={value => onChange(value.value)}
-                                options={blood_groups}
-                                ref={ref}
-                                name={name}
-                            />
-                            )}
-                    />
+                    <label htmlFor="bloodGroup" className="block mb-2 text-sm font-medium text-gray-900">Groupe Sanguain</label>
+                        <Controller
+                                name="bloodGroup"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field: { onChange, value, name, ref } }) => (
+                                    <ReactSelect
+                                    value={blood_groups.find((c) => c.value === value)}
+                                    onChange={value => onChange(value.value)}
+                                    options={blood_groups}
+                                    ref={ref}
+                                    name={name}
+                                />
+                                )}
+                        />
+                        {errors.sex && <div className="invalid-feedback">{errors.sex.message}</div>}
                 </div>
                 <div className="">
-                    <Input input_label="email" input_name="email" input_type="email" register={register} error_field={errors.email?.message} />
+                    <Input input_label="Email" input_name="email" input_type="email" register={register} error_field={errors.email?.message} />
                 </div>
                 <div className="">
-                    <Input input_label="numéro téléphone" input_name="phoneNumber" input_type="tel" register={register} error_field={errors.phoneNumber?.message} />
+                    <Input input_label="Numéro téléphone" input_name="phoneNumber" input_type="tel" register={register} error_field={errors.phoneNumber?.message} />
                 </div>
                 <div className="">
-                    <Input input_label="personne à contacter en cas d'urgence" input_name="emergencyPerson" input_type="text" register={register} error_field={errors.emergencyPerson?.message} />
+                    <Input input_label="Personne à contacter en cas d'urgence" input_name="emergencyPerson" input_type="text" register={register} error_field={errors.emergencyPerson?.message} />
                 </div>
                 <div className="">
-                    <Input input_label="numéro de la personne à contacter" input_name="emergencyContact" input_type="tel" register={register} error_field={errors.emergencyContact?.message} />
+                    <Input input_label="Numéro de la personne à contacter" input_name="emergencyContact" input_type="tel" register={register} error_field={errors.emergencyContact?.message} />
                 </div>
                 <div className="">
                 <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status</label>
@@ -113,7 +117,7 @@ const New = () => {
                         )}
                     />
                 </div>
-                <div className="">
+                <div className="row mt-2">
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>

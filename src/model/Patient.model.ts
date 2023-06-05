@@ -9,8 +9,7 @@ const Patient = yup.object({
         .required('le numéro de téléphone est requis'),
     status: yup.number(),
     emergencyPerson: yup.string(),
-    emergencyContact: yup.string()
-        .length(9, 'le numéro de téléphone doit avoir 9 chiffre'),
+    emergencyContact: yup.string(),
     bloodGroup: yup.string().max(3),
     birthDate: yup.string()
         .required('la date de naissance est requise')
