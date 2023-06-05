@@ -4,6 +4,8 @@ import { faCog, faUsers } from '@fortawesome/free-solid-svg-icons'
 import LineChart from '../components/Charts/LineChart'
 import DoughnutChart from '../components/Charts/DoughnutChart'
 import axios from 'axios'
+import StatCard from '../components/Cards/StatCard'
+import URLS from '../utils/app_urls'
 export default class Home extends Component {
     constructor(props){
         super(props)
@@ -164,36 +166,62 @@ export default class Home extends Component {
     render() {
         return (
             <>
-                <section>
-                    <div className="grid grid-cols-4 gap-5">
-                        <EntityCardCount title="Patients" amount={this.state.patients} icon={faUsers} bg_color='blue' />
-                        <EntityCardCount title="Consultation" amount={this.state.consultations} icon={faCog} bg_color='green' />
-                        <EntityCardCount title="Hospitalization" amount={this.state.hospitalizations} icon={faUsers} bg_color="blue" />
-                        <EntityCardCount title="Room" amount={this.state.rooms} icon={faUsers} bg_color="blue" />
-                        <EntityCardCount title="Médécins" amount={this.state.doctors} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Infirmiers" amount={this.state.nurses} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Lab Tech" amount={this.state.labTech} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Aides Soignants" amount={this.state.caregiver} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="thanatopracteurs" amount={this.state.embalmer} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Informaticiens" amount={this.state.compScien} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Comptables" amount={this.state.accountant} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Agent Sécurité" amount={this.state.security} icon={faUsers} bg_color="blue" />
-                        <EntityCardCount title="Tech Surface" amount={this.state.maintenance} icon={faUsers} bg_color="blue" />
-                        <EntityCardCount title="Stagiaires" amount={this.state.interns} icon={faUsers} bg_color="blue" />
-                        <EntityCardCount title="Services" amount={this.state.services} icon={faUsers} bg_color="red" />
-                        <EntityCardCount title="Utilisateurs" amount={this.state.users} icon={faUsers} bg_color="red" />
+                <div className="row">
+                    <div className="col">
+                        <div className="h-100">
+                            <div className="row mb-3 pb-1">
+                                <div className="col-12">
+                                    <div className="d-flex align-items-lg-center flex-lg-row flex-column">
+                                        <div className="flex-grow-1">
+                                            <h4 className="fs-16 mb-1">Good Morning, Anna!</h4>
+                                            <p className="text-muted mb-0">Here's what's happening with your store
+                                                today.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <StatCard name="patients" number={this.state.patients} url={URLS.patient.index} icon="user-pin"></StatCard>
+                                <StatCard name="consultations" number={this.state.consultations} url={URLS.consultations.index} icon="cube" ></StatCard>
+                                <StatCard name="hospitalisations" number={this.state.hospitalizations} url={URLS.consultations.index} icon="bed"></StatCard>
+                                <StatCard name="chambre" number={this.state.rooms} url={URLS.rooms.index} icon="home-circle"></StatCard>
+                                <StatCard name="Médécins" number={this.state.doctors} url={URLS.personnel.index} icon="user-circle"></StatCard>
+                                <StatCard name="Infirmier" number={this.state.nurses} url={URLS.personnel.index} icon="user-circle"></StatCard>
+                                <StatCard name="Technicien Labo." number={this.state.labTech} url={URLS.personnel.index} icon="user-circle"></StatCard>
+                                <StatCard name="Aides Soignant" number={this.state.caregiver} url={URLS.personnel.index} icon="user-circle"></StatCard>
+                                <StatCard name="Thanatopracteurs" number={this.state.embalmer} url={URLS.personnel.index} icon="user-circle"></StatCard>
+                                <StatCard name="Informaticiens" number={this.state.compScien} url={URLS.personnel.index} icon="user-voice"></StatCard>
+                                <StatCard name="Comptable" number={this.state.accountant} url={URLS.personnel.index} icon="user-voice"></StatCard>
+                                <StatCard name="Agent Sécurité" number={this.state.security} url={URLS.personnel.index} icon="user-voice"></StatCard>
+                                <StatCard name="Technicien de Surface" number={this.state.maintenance} url={URLS.personnel.index} icon="user-voice"></StatCard>
+                                <StatCard name="Service" number={this.state.services} url={URLS.personnel.index} icon="cog"></StatCard>
+                                <StatCard name="Utilisateur" number={this.state.users} url={URLS.personnel.index} icon="user-voice"></StatCard>
+                            </div>
+
+                        </div>
+
                     </div>
-                </section>
+                </div>
                 <section className="py-10">
-                    <div className="grid grid-cols-2 gap-5">
-                        <LineChart name="consultations" onChange={this.handleChange} entity={this.state.consultations_chart}/>
-                        <LineChart name="patients" onChange={this.handleChange} entity={this.state.patients_chart}/>
-                        <div className="col-span-3 grid grid-cols-3 gap-5">
-                            <DoughnutChart entity={this.state.personnel_sex_chart}/>
-                            <DoughnutChart entity={this.state.patients_sex_chart}/>
-                            <DoughnutChart entity={this.state.patients_age_chart}/>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <LineChart name="consultations" onChange={this.handleChange} entity={this.state.consultations_chart}/>
+                        </div>
+                        <div className="col-md-6">
+                            <LineChart name="patients" onChange={this.handleChange} entity={this.state.patients_chart}/>
                         </div>
                     </div>
+                    <div className="row py-5">
+                            <div className="col-md-4">
+                                <DoughnutChart entity={this.state.personnel_sex_chart}/>
+                            </div>
+                            <div className="col-md-4">
+                                <DoughnutChart entity={this.state.patients_sex_chart}/>
+                            </div>
+                            <div className="col-md-4">
+                                <DoughnutChart entity={this.state.patients_age_chart}/>
+                            </div>
+                        </div>
                 </section>
             </>
         )

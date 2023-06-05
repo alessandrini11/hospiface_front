@@ -1,4 +1,5 @@
 import React from 'react'
+import CountUp from 'react-countup'
 import { Link } from 'react-router-dom'
 
 type Props = {
@@ -23,7 +24,7 @@ const StatCard = ({name, number, icon, url}: Props) => {
                     </div>
                     <div className="d-flex align-items-end justify-content-between mt-4">
                         <div>
-                            <h4 className="fs-22 fw-semibold ff-secondary mb-4">{number}</h4>
+                            <h4 className="fs-22 fw-semibold ff-secondary mb-4"><CountUp end={number} duration={3}/></h4>
                             <Link to={url} className="text-decoration-underline text-muted">Voir plus</Link>
                         </div>
                         <div className="avatar-sm flex-shrink-0">

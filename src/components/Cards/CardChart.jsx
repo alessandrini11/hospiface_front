@@ -4,7 +4,7 @@ const CardChart = ({name, children}) => {
     return (
         <div className="bg-white p-5">
             <div className="">
-                <h1>{name}</h1>
+                <p className="text-uppercase fw-medium text-muted text-truncate mb-0">{name}</p>
             </div>
             {children}
         </div>

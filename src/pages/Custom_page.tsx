@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import SideBar from '../components/SideBar'
 import Header from '../components/new/Header'
-import StatCard from '../components/new/StatCard'
+import StatCard from '../components/Cards/StatCard'
 import Table from '../components/new/Table'
 import URLS from '../utils/app_urls'
 import Footer from '../components/Footer'
@@ -17,8 +17,7 @@ const Custom_page = ({children}: Props) => {
             <div className="vertical-overlay"></div>
             <div className="main-content"> 
                 <div className="page-content">
-                    <div className="container-fluid">
-    
+                    <div className="container-fluid">  
                         <div className="row">
                             <div className="col-12">
                                 <div className="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -34,10 +33,8 @@ const Custom_page = ({children}: Props) => {
                                 </div>
                             </div>
                         </div>
-    
                         <div className="row">
                             <div className="col">
-    
                                 <div className="h-100">
                                     <div className="row mb-3 pb-1">
                                         <div className="col-12">

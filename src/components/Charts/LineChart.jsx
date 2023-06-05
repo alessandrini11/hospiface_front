@@ -25,7 +25,22 @@ ChartJS.register(
 const LineChart = ({entity, name, onChange}) => {
     const options = {
         responsive: true,
+        x: {
+          ticks: {
+              font: {
+                  family: 'Poppins',
+              },
+          },
+      },
+      y: {
+          ticks: {
+              font: {
+                  family: 'Poppins',
+              },
+          },
+      },
     }
+    const color = "rgb(255, 99, 132)"
     const labels = entity.labels
     const data = {
         labels,
@@ -33,15 +48,32 @@ const LineChart = ({entity, name, onChange}) => {
           {
             label: 'C',
             data: entity.datas,
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: color,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            fill: true,
+            lineTension: 0.5,
+            borderColor: color,
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: color,
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: color,
+            pointHoverBorderColor: "#fff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
           },
         ],
       };
+      
     return (
         <div className="bg-white p-5">
-            <div className="flex justify-between">
-                <h1>{entity.name}</h1>
+            <div className="d-flex justify-content-between">
+                <p className="text-uppercase fw-medium text-muted text-truncate mb-0">{entity.name}</p>
                 <form action="">
                   <select onChange={(e) => onChange(name, e.target.value)} name="" id="">
                     <option value="none">None</option>
