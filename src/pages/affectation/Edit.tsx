@@ -73,6 +73,7 @@ const Edit = () => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifier une affectation</h2>
                 <div className="">
                     <label htmlFor="personnel" className="block mb-2 text-sm font-medium text-gray-900">Personnel</label>
                         <Controller

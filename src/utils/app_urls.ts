@@ -6,6 +6,7 @@ const SERVICE = "Services"
 const USER = "users"
 const APPOINTMENT = "rendezvous"
 const HOSPITALISATION = "hospitalisations"
+const AFFECTATIONS = "affectations"
 const URLS = {
     patient: {
         index: `/${PATIENTS}`,
@@ -31,7 +32,8 @@ const URLS = {
     service: {
         index: `/${SERVICE}`,
         new: `/${SERVICE}/new`,
-        edit: `/${SERVICE}/edit`
+        edit: `/${SERVICE}/edit`,
+        show: `/${SERVICE}/show`,
     },
     user: {
         index: `/${USER}`,
@@ -47,6 +49,11 @@ const URLS = {
         index: `/${HOSPITALISATION}`,
         new: `/${HOSPITALISATION}/new`,
         edit: `/${HOSPITALISATION}/edit`
+    },
+    affectations: {
+        index: `/${AFFECTATIONS}`,
+        new: `/${AFFECTATIONS}/new`,
+        edit: `/${AFFECTATIONS}/edit`
     }
 }
 

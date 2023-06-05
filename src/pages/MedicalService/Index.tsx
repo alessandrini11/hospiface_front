@@ -10,6 +10,7 @@ import CardContainer from '../../components/Cards/CardContainer'
 import SearchForm from '../../components/SearchForm'
 import AddButton from '../../components/Ui/AddButton'
 import ServiceTable from '../../components/ServiceTable'
+import URLS from '../../utils/app_urls'
 
 type Props = {}
 
@@ -73,28 +74,15 @@ const Index = (props: Props) => {
         })
     }
     const data = !services ?
-    <div className="flex justify-center">
+    <div className="d-flex justify-content-center">
         <Spinner></Spinner>
     </div> :
-    <ServiceTable handle_click={handle_click} pagination={pagination} columns={service_columns} entities={services} page={page} />
+    <ServiceTable newUrl={URLS.service.new} handle_click={handle_click} pagination={pagination} columns={service_columns} entities={services} page={page} />
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            
-            <CardContainer>
-                <div className="">
-                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
-                        <div className="">
-                            <SearchForm />
-                        </div>
-                        <p className="">
-                            <AddButton url="/services/new"></AddButton>
-                        </p>
-                    </div>
-                    {data}
-                </div>
-            </CardContainer>
+            {data}
         </>  
     )
 }
