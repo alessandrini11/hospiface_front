@@ -10,6 +10,7 @@ import UserTable from '../../components/UserTable'
 import {messages, user_columns} from '../../utils/constants'
 import SearchForm from '../../components/SearchForm'
 import AddButton from '../../components/Ui/AddButton'
+import URLS from '../../utils/app_urls'
 const Index = () => {
     const [search_params, set_search_params] = useSearchParams()
     const [created_message, set_created_message] = useState<string | null>(null)
@@ -74,25 +75,14 @@ const Index = () => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <UserTable handle_click={handle_click} pagination={pagination} columns={user_columns} entities={users} page={page} />
+    <UserTable newUrl={URLS.users.new} handle_click={handle_click} pagination={pagination} columns={user_columns} entities={users} page={page} />
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            
-            <CardContainer>
-                <div className="">
-                    <div className="flex justify-between items-center py-4 flex-wrap space-y-2">
-                        <div className="">
-                            <SearchForm />
-                        </div>
-                        <p className="">
-                            <AddButton url="/users/new"></AddButton>
-                        </p>
-                    </div>
-                    {data}
-                </div>
-            </CardContainer>
+            <div className="row">
+                {data}
+            </div>
         </>  
     )
 }

@@ -9,6 +9,7 @@ import Alert from '../../components/Alert'
 import CardContainer from '../../components/Cards/CardContainer'
 import AddButton from '../../components/Ui/AddButton'
 import GardesTable from '../../components/GardesTable'
+import URLS from '../../utils/app_urls'
 
 type Props = {}
 
@@ -51,7 +52,7 @@ const Index = (props: Props) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 console.log('deleted')
-                axios.delete(`/patients/${id}`)
+                axios.delete(`/gardes/${id}`)
                     .then(response => {
                         Swal.fire({
                             title: 'success',
@@ -77,23 +78,15 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <GardesTable handle_click={handle_click} pagination={pagination} columns={garde_columns} entities={gardes} page={page} />
+    <GardesTable newUrl={URLS.gardes.new} handle_click={handle_click} pagination={pagination} columns={garde_columns} entities={gardes} page={page} />
 
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            
-            <CardContainer>
-                <div className="">
-                    <div className="flex justify-end items-center py-4 flex-wrap space-y-2">
-                        <p className="">
-                            <AddButton url="/gardes/new"></AddButton>
-                        </p>
-                    </div>
-                    {data}
-                </div>
-            </CardContainer>
+            <div className="row">
+                {data}
+            </div>
         </>
     )
 }

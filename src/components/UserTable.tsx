@@ -4,84 +4,91 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Pagination from '../components/Pagination'
-import { user_status } from '../utils/constants'
+import SearchForm from './SearchForm'
+import URLS from '../utils/app_urls'
 type Props = {
     columns: Array<string>,
     entities: createdUpdatedBy[],
     page: string | null,
+    newUrl: string,
     pagination: {
       actual_Page: number,
       total_Page: number
     } | null,
     handle_click: (id: number) => void
 }
-const UserTable = ({columns, entities, page, pagination, handle_click}: Props) => {
+const UserTable = ({columns, newUrl, entities, page, pagination, handle_click}: Props) => {
     return (
-        <div className="relative overflow-x-auto">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">Number</th>
-                        {columns.map((head, index) => (
-                            <th key={index} className="px-6 py-3">
-                                {head}
-                            </th>
-                        ))
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    { entities.length === 0 ?
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td colSpan={2} className="px-6 py-4">Aucun enregistrement</td>
-                    </tr> :
-                    entities.map((entity, index) => (
-                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td className="px-3 py-2">{index + 1}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.firstname + ' ' + entity.lastname}
-                        </td>
-                        <td className="px-6 py-4 text-center whitespace-nowrap">
-                            {entity.sex}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.email}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.phonenumber}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.roles.includes('ROLE_SUPER_ADMIN') ? 'super admin' : 'admin'}
-                        </td>
-                        <td className="px-6 py-4 text-center whitespace-nowrap">
-                            {user_status.find(status => status.value === entity.status)?.label}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {(new Date(entity.created_at)).toDateString()}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            {entity.updated_at && (new Date(entity.created_at)).toDateString()}
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex gap-3">
-                                <Link to={`/users/show/${entity.id}`} className="transition-all cursor-pointer hover:scale-150">
-                                    <FontAwesomeIcon icon={faEye} />
-                                </Link>
-                                <Link to={`/users/edit/${entity.id}`} className="transition-all cursor-pointer hover:scale-150">
-                                    <FontAwesomeIcon icon={faPencil}/>
-                                </Link>
-                                <a onClick={() => handle_click(entity.id)} className="transition-all cursor-pointer hover:scale-150">
-                                    <FontAwesomeIcon icon={faTrash}/>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="py-4">
-                <Pagination page={page} actual_page={pagination?.actual_Page} total_page={pagination?.total_Page}/>
-            </div>
+        <div className="">
+            <div className="card">
+                <div className="card-header">
+                    <h4 className="card-title mb-0 flex-grow-1">Utilisateurs</h4>
+                    <div className="d-flex justify-content-between mt-3">
+                        <div className="">
+                            <SearchForm></SearchForm>
+                        </div>
+                        <div className="flex-shrink-0">
+                            <Link to={newUrl} className="btn btn-soft-success btn-sm">
+                                <i className=" bx bx-plus-circle inline"></i>ajouter
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <div className="table-responsive table-card">
+                        <table className="table table-borderless table-centered align-middle table-nowrap mb-0">
+                            <thead className="text-muted table-light">
+                                <tr>
+                                    <th scope="col" className="">Number</th>
+                                    {columns.map((head, index) => (
+                                        <th key={index} className="">
+                                            {head}
+                                        </th>
+                                    ))
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {entities.length > 0 ? entities.map((entity, index) => (
+                                    <tr key={index}>
+                                        <td>
+                                            <span className="fw-medium link-primary">{entity.id}</span>
+                                        </td>
+                                        <td>
+                                            <div className="d-flex align-items-center">
+                                                <div className="flex-shrink-0 me-2">
+                                                </div>
+                                                <div className="flex-grow-1">{ entity.firstname + ' ' + entity.lastname}</div>
+                                            </div>
+                                        </td>
+                                        <td>{entity.sex}</td>
+                                        <td>{entity.email}</td>
+                                        <td>{entity.phonenumber}</td>
+                                        <td>
+                                            {entity.roles.includes('ROLE_ADMIN') ? <span className="badge text-bg-danger">admin</span> : <span className="badge text-bg-primary">user</span>}
+                                        </td>
+                                        <td>
+                                            {entity.status === 1 ? <span className="badge text-bg-success">actif</span> :  <span className="badge text-bg-warning">inactif</span> }
+                                        </td>
+                                        <td>{entity.created_at && new Date(entity.created_at).toDateString()}</td>
+                                        <td>{entity.updated_at && new Date(entity.updated_at).toDateString()}</td>
+                                        <td>
+                                            <div className="d-flex justify-content-between">
+                                                <Link className='px-1' to={`${URLS.users.edit}/${entity.id}`}><FontAwesomeIcon icon={faPencil} /></Link>
+                                                <Link className='px-1' onClick={() => handle_click(entity.id)} to=""><FontAwesomeIcon icon={faTrash} /></Link>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                ))
+                                
+                                : false}
+                            </tbody>
+                        </table>
+                    </div>
+                    <Pagination page={page} actual_page={pagination?.actual_Page} total_page={pagination?.total_Page}></Pagination>
+                </div>
+            </div> 
         </div>
     )
 }

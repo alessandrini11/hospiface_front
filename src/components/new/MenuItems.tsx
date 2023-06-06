@@ -17,7 +17,7 @@ const menuItemArray: MenuItemType[] = [
     {name: "Chambres", icon: "home-circle", navLinks:[{name: "List", url: "/chambres"},{name: "New", url: "/chambres/new"}]},
     {name: "Services", icon: "cog", navLinks:[{name: "List", url: "/services"},{name: "New", url: "/services/new"}]},
     {name: "Affectation", icon: "repost", navLinks:[{name: "List", url: "/affectations"},{name: "New", url: "/affectations/new"}]},
-    {name: "Tour de garde", icon: "walk", navLinks:[{name: "List", url: "/gardes"},{name: "New", url: "/gardes/new"}]},
+    {name: "Garde", icon: "walk", navLinks:[{name: "List", url: "/gardes"},{name: "New", url: "/gardes/new"}]},
     {name: "Utilisateurs", icon: "user", navLinks:[{name: "List", url: "/users"},{name: "New", url: "/users/new"}]},
 ]
 const MenuItems = () => {

@@ -34,11 +34,11 @@ const Edit = (props: Props) => {
             })
     }, [userId])
     const onSubmit = (body: any): void => {
+        setSubmiting(true)
         let submitedBody: any = body
         if(body.password === ""){
             submitedBody = {...body, password: null}
         }
-        setSubmiting(true)
         axios.put(`/users/${userId}`, submitedBody)
             .then(response => {
                 if(response.status === 200){
@@ -59,6 +59,7 @@ const Edit = (props: Props) => {
         <>
             { errorMessage && <Alert type="modal" icon="error" title={errorMessage} ></Alert>}
             <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Modifier un utilisateur</h2>
                 <div className="">
                     <Input input_label="nom" input_name="firstname" input_type="text" register={register} error_field={errors.firstname?.message} />
                 </div>

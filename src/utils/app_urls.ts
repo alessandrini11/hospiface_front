@@ -7,6 +7,8 @@ const USER = "users"
 const APPOINTMENT = "rendezvous"
 const HOSPITALISATION = "hospitalisations"
 const AFFECTATIONS = "affectations"
+const GARDES = "gardes"
+const USERS = "users"
 const URLS = {
     patient: {
         index: `/${PATIENTS}`,
@@ -54,7 +56,18 @@ const URLS = {
         index: `/${AFFECTATIONS}`,
         new: `/${AFFECTATIONS}/new`,
         edit: `/${AFFECTATIONS}/edit`
-    }
+    },
+    gardes: {
+        index: `/${GARDES}`,
+        new: `/${GARDES}/new`,
+        edit: `/${GARDES}/edit`,
+        show: `/${GARDES}/show`,
+    },
+    users: {
+        index: `/${USERS}`,
+        new: `/${USERS}/new`,
+        edit: `/${USERS}/edit`,
+    },
 }
 
 export default URLS

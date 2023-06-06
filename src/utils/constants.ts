@@ -64,7 +64,6 @@ export const personnel_title = [
 export const personnel_status = [
     { value: 0, label: 'inactif'},
     { value: 1, label: 'actif'},
-    { value: 2, label: 'supprimé'},
 ]
 export const personnel_position = [
     { value: 'general manager', label: 'directeur général'},
@@ -99,14 +98,13 @@ export const hospitalisation_status = [
     {value: 2, label: 'ended'}
 ]
 export const garde_status = [
-    {value: 0, label: 'programmed'},
-    {value: 1, label: 'started'},
-    {value: 2, label: 'ended'}
+    {value: 0, label: 'programmé'},
+    {value: 1, label: 'en cours'},
+    {value: 2, label: 'terminé'}
 ]
 export const user_status = [
-    {value: 0, label: 'disabled'},
-    {value: 1, label: 'enabled'},
-    {value: 2, label: 'deleted'}
+    {value: 0, label: 'inactif'},
+    {value: 1, label: 'actif'},
 ]
 export const users_roles = [
     {value: 'ROLE_USER', label: 'Utilisateur'},
