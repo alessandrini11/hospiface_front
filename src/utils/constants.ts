@@ -9,8 +9,9 @@ export const blood_groups = [
     { value: "O-", label: "O-" },
 ]
 export const patient_status = [
-    {value: 1, label: "mort"},
-    {value: 2, label: "hostpitalisé"},
+    {value: 0, label: "mort"},
+    {value: 1, label: "hospitalisé"},
+    {value: 2, label: "libre"},
 ]
 
 export const consultation_status = [
@@ -93,9 +94,9 @@ export const appointment_status = [
     {value: 1, label: 'terminé'},
 ]
 export const hospitalisation_status = [
-    {value: 0, label: 'programmed'},
-    {value: 1, label: 'started'},
-    {value: 2, label: 'ended'}
+    {value: 0, label: 'programmé'},
+    {value: 1, label: 'en cours'},
+    {value: 2, label: 'terminé'}
 ]
 export const garde_status = [
     {value: 0, label: 'programmé'},

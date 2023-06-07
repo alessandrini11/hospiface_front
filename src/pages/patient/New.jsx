@@ -117,7 +117,7 @@ const New = () => {
                         )}
                     />
                 </div>
-                <div className="row mt-2">
+                <div className="">
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>
                 </div>
             </form>

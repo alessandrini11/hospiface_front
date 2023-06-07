@@ -127,7 +127,7 @@ const Edit = () => {
                         )}
                     />
                 </div>
-                <div className="row mt-2">
+                <div className="">
                     <SubmitButton submiting={sumbiting} label="mise à jour"/>
                 </div>
             </form>

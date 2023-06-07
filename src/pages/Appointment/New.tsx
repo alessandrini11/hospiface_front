@@ -9,7 +9,7 @@ import SubmitButton from '../../components/Ui/SubmitButton';
 import Input from '../../components/Ui/Input';
 import { appointment_status, messages } from '../../utils/constants';
 import axios from 'axios';
-import { PersonnelType } from '../../entityPropsType';
+import { Patient, PersonnelType } from '../../entityPropsType';
 type Props = {}
 
 const New = (props: Props) => {
@@ -27,7 +27,7 @@ const New = (props: Props) => {
             .then(response => {
                 const doctorsArr: Array<{label: string, value: number}>=[]
                 const doctor: PersonnelType[] = response.data.data.data.filter((personnel: PersonnelType) =>  (
-                    personnel.subType === "doctor" 
+                    personnel.subType === "doctor" && personnel.status === 1
                 ))
                 doctor.forEach(doc => {
                     doctorsArr.push({value: doc.id, label: `${doc.title} ${doc.firstName} ${doc.lastName}`})
@@ -37,9 +37,12 @@ const New = (props: Props) => {
         axios.get('/patients')
             .then(response => {
                 const patientsArr: Array<{label: string, value: number}>=[]
-                response.data.data.data.forEach(patient => {
+                const patientsFilter: Patient[] = response.data.data.data.filter((patient: Patient) => (
+                    patient.status === 2
+                ))
+                patientsFilter.map(patient => (
                     patientsArr.push({value: patient.id, label: `${patient.firstName} ${patient.lastName}`})
-                })
+                ))
                 set_patients(patientsArr)
             })
     }, [])

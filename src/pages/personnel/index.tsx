@@ -76,7 +76,7 @@ const index = (props: Props) => {
     <div style={{height: '90%'}} className="d-flex align-items-center justify-content-center">
         <Spinner></Spinner>
     </div>  :
-    <PersonnelTable newUrl={URLS.personnel.new} handle_click={handle_click} pagination={pagination} columns={personnel_columns} entities={personnel} page={page} />
+    <PersonnelTable newUrl={URLS.personnel.new} handle_click={handle_click} pagination={pagination} columns={personnel_columns} entities={personnel} page="personnel" />
 
 
     return (

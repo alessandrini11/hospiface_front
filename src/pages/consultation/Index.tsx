@@ -22,7 +22,6 @@ const Index = (props: Props) => {
     useEffect(() => {
         axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
-                console.log(response.data.data)
                 set_personnel(response.data.data.data)
                 set_pagination({
                     actual_Page: response.data.data.page,
@@ -50,7 +49,6 @@ const Index = (props: Props) => {
             cancelButtonText: 'Non'
           }).then((result) => {
             if (result.isConfirmed) {
-                console.log('deleted')
                 axios.delete(`/patients/${id}`)
                     .then(response => {
                         Swal.fire({
@@ -77,7 +75,7 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <ConsultationTable newUrl={URLS.consultations.new} handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page={page} />
+    <ConsultationTable newUrl={URLS.consultations.new} handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page="consultations" />
 
     return (
         <>

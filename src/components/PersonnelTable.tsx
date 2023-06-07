@@ -4,7 +4,7 @@ import Pagination from './Pagination'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
-import { personnel_status } from '../utils/constants'
+import { personnel_status, personnel_subType, personnel_type, sexs } from '../utils/constants'
 import SearchForm from './SearchForm'
 import URLS from '../utils/app_urls'
 type Props = {
@@ -63,16 +63,16 @@ function PersonnelTable({columns, newUrl, entities, page, pagination, handle_cli
                                                 <div className="flex-grow-1">{ entity.title + ' ' + entity.firstName + ' ' + entity.lastName}</div>
                                             </div>
                                         </td>
-                                        <td>{entity.type}</td>
-                                        <td>{entity.subType}</td>
+                                        <td>{personnel_type.find(type => type.value === entity.type)?.label}</td>
+                                        <td>{personnel_subType[entity.type].find(subType => subType.value === entity.subType)?.label}</td>
                                         <td>{entity.positionHeld}</td>
-                                        <td>{entity.speciality.name}</td>
-                                        <td>{entity.sex}</td>
+                                        <td>{entity.speciality?.name}</td>
+                                        <td>{sexs.find(sex => sex.value === entity.sex)?.label}</td>
                                         <td>{entity.bloodGroup}</td>
                                         <td>{entity.phoneNumber}</td>
                                         <td>{entity.email}</td>
                                         <td>{entity.address}</td>
-                                        <td>{personnel_status.find(status => status.value === entity.status)?.label}</td>
+                                        <td>{entity.status === 1 ? <span className="badge text-bg-success">actif</span> :  <span className="badge text-bg-warning">inactif</span> }</td>
                                         <td className="text-center">{entity.consultations}</td>
                                         {/* <td>{new Date().getFullYear() - new Date(entity.birthDate).getFullYear()} ans</td> */}
                                         {/* <td>{new Date(entity.created_at).toDateString()}</td> */}

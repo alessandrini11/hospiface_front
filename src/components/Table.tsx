@@ -10,7 +10,7 @@ import SearchForm from './SearchForm'
 type Props = {
     columns: string[],
     entities: Patient[],
-    page: string | null,
+    page: string,
     newUrl: string,
     pagination: {
       actual_Page: number,
@@ -64,7 +64,7 @@ const Table = ({columns, entities, newUrl, pagination, page, handle_click}: Prop
                                                 </div>
                                             </td>
                                             <td>{entity.sex}</td>
-                                            <td>{new Date().getFullYear() - new Date(entity.birthDate).getFullYear()} ans</td>
+                                            <td>{new Date().getFullYear() - new Date(entity.birthDate).getFullYear() !== 0 ? `${new Date().getFullYear() - new Date(entity.birthDate).getFullYear()} ans` : `${new Date().getMonth() - new Date(entity.birthDate).getMonth()} mois`}</td>
                                             <td className="text-center">{entity.bloodGroup}</td>
                                             <td>{entity.phoneNumber}</td>
                                             <td>{entity.email}</td>
@@ -72,7 +72,9 @@ const Table = ({columns, entities, newUrl, pagination, page, handle_click}: Prop
                                             <td>{entity.emergencyPerson}</td>
                                             <td>{entity.emergencyContact}</td>
                                             <td>
-                                                {patient_status.find(status => status.value === entity.status)?.label}
+                                                {entity.status === 0 && <span className="badge badge-soft-danger">mort</span>}
+                                                {entity.status === 1 && <span className="badge badge-soft-warning">hospitalisé</span>}
+                                                {entity.status === 2 && <span className="badge badge-soft-success">libre</span>}
                                                 {/* <span className="badge badge-soft-success">Paid</span> */}
                                             </td>
                                             <td className="text-center">{entity.consultations.length}</td>

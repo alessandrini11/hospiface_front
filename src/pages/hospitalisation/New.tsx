@@ -4,7 +4,7 @@ import HospitalizationModel from '../../model/Hospitalization.model';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { RoomType } from '../../entityPropsType';
+import { Patient, RoomType } from '../../entityPropsType';
 import { hospitalisation_status, hospitalisation_type, messages } from '../../utils/constants';
 import Alert from '../../components/Alert';
 import Select from 'react-select'
@@ -35,9 +35,12 @@ const New = (props: Props) => {
         axios.get('/patients')
             .then(response => {
                 const patientsArr: Array<{label: string, value: number}>=[]
-                response.data.data.data.forEach(patient => {
+                const patientsFilter: Patient[] = response.data.data.data.filter((patient: Patient) => (
+                    patient.status === 2
+                ))
+                patientsFilter.map(patient => (
                     patientsArr.push({value: patient.id, label: `${patient.firstName} ${patient.lastName}`})
-                })
+                ))
                 set_patients(patientsArr)
             })
     }, [])
@@ -116,6 +119,15 @@ const New = (props: Props) => {
                         />
                 </div>
                 <div className="">
+                    <Input input_label="date début" input_name="startDate" input_type="date" register={register} error_field={errors.startDate?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="date date fin" input_name="endDate" input_type="date" register={register} error_field={errors.endDate?.message} />
+                </div>
+                <div className="">
+                    <Input input_label="description" input_name="description" input_type="text" register={register} error_field={errors.startDate?.message} />
+                </div>
+                <div className="">
                     <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status</label>
                         <Controller
                             name="status"
@@ -131,15 +143,6 @@ const New = (props: Props) => {
                                 />
                             )}
                         />
-                </div>
-                <div className="">
-                    <Input input_label="date début" input_name="startDate" input_type="date" register={register} error_field={errors.startDate?.message} />
-                </div>
-                <div className="">
-                    <Input input_label="date date fin" input_name="endDate" input_type="date" register={register} error_field={errors.endDate?.message} />
-                </div>
-                <div className="">
-                    <Input input_label="description" input_name="description" input_type="text" register={register} error_field={errors.startDate?.message} />
                 </div>
                 <div className="">
                     <SubmitButton submiting={sumbiting} label="enregistrer"/>

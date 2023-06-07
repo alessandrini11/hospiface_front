@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import HospitalizationModel from '../../model/Hospitalization.model';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { HospitalizationType, RoomType } from '../../entityPropsType';
+import { HospitalizationType, Patient, RoomType } from '../../entityPropsType';
 import { hospitalisation_status, hospitalisation_type, messages } from '../../utils/constants';
 import Alert from '../../components/Alert';
 import Select from 'react-select'
@@ -55,9 +55,12 @@ const Edit = (props: Props) => {
         axios.get('/patients')
             .then(response => {
                 const patientsArr: Array<{label: string, value: number}>=[]
-                response.data.data.data.forEach(patient => {
+                const patientsFilter: Patient[] = response.data.data.data.filter((patient: Patient) => (
+                    patient.status === 2
+                ))
+                patientsFilter.map(patient => (
                     patientsArr.push({value: patient.id, label: `${patient.firstName} ${patient.lastName}`})
-                })
+                ))
                 set_patients(patientsArr)
             })
     }, [hospitalisationId])

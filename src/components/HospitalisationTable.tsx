@@ -26,7 +26,7 @@ const HospitalisationTable = ({columns, newUrl, entities, page, pagination, hand
         <div className="">
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title mb-0 flex-grow-1">Rendez Vous</h4>
+                    <h4 className="card-title mb-0 flex-grow-1">Hospitalisations</h4>
                     <div className="d-flex justify-content-between mt-3">
                         <div className="">
                             <SearchForm></SearchForm>

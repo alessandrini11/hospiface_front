@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { AppointmentType, PersonnelType } from '../../entityPropsType';
+import { AppointmentType, Patient, PersonnelType } from '../../entityPropsType';
 import AppointmentModel from '../../model/Appointment.model';
 import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -46,7 +46,7 @@ const Edit = (props: Props) => {
             .then(response => {
                 const doctorsArr: Array<{label: string, value: number}>=[]
                 const doctor: PersonnelType[] = response.data.data.data.filter((personnel: PersonnelType) =>  (
-                    personnel.subType === "doctor" 
+                    personnel.subType === "doctor" && personnel.status === 1
                 ))
                 doctor.forEach(doc => {
                     doctorsArr.push({value: doc.id, label: `${doc.title} ${doc.firstName} ${doc.lastName}`})
@@ -56,9 +56,12 @@ const Edit = (props: Props) => {
         axios.get('/patients')
             .then(response => {
                 const patientsArr: Array<{label: string, value: number}>=[]
-                response.data.data.data.forEach(patient => {
+                const patientsFilter: Patient[] = response.data.data.data.filter((patient: Patient) => (
+                    patient.status === 2
+                ))
+                patientsFilter.map(patient => (
                     patientsArr.push({value: patient.id, label: `${patient.firstName} ${patient.lastName}`})
-                })
+                ))
                 set_patients(patientsArr)
             })
     }, [appointmentId])

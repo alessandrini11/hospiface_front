@@ -78,7 +78,7 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <AppointmentTable newUrl={URLS.appointment.new} handle_click={handle_click} pagination={pagination} columns={appointment_columns} entities={appointments} page={page} />
+    <AppointmentTable newUrl={URLS.appointment.new} handle_click={handle_click} pagination={pagination} columns={appointment_columns} entities={appointments} page="rendezvous" />
 
     return (
         <>

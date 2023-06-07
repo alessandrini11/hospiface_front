@@ -12,7 +12,7 @@ import { messages,
     consultation_type
 } from '../../utils/constants'
 import ConsultationModel from '../../model/Consulataion.model'
-import { ConsultationType, PersonnelType } from '../../entityPropsType'
+import { ConsultationType, Patient, PersonnelType } from '../../entityPropsType'
 
 type Props = {}
 
@@ -52,7 +52,7 @@ const Edit = (props: Props) => {
             .then(response => {
                 const doctorsArr: Array<{label: string, value: number}>=[]
                 const doctor: PersonnelType[] = response.data.data.data.filter((personnel: PersonnelType) =>  (
-                    personnel.subType === "doctor" 
+                    personnel.subType === "doctor" && personnel.status === 1
                 ))
                 doctor.forEach(doc => {
                     doctorsArr.push({value: doc.id, label: `${doc.title} ${doc.firstName} ${doc.lastName}`})
@@ -62,18 +62,19 @@ const Edit = (props: Props) => {
         axios.get('/patients')
             .then(response => {
                 const patientsArr: Array<{label: string, value: number}>=[]
-                response.data.data.data.forEach(patient => {
+                const patientsFilter: Patient[] = response.data.data.data.filter((patient: Patient) => (
+                    patient.status === 2
+                ))
+                patientsFilter.map(patient => (
                     patientsArr.push({value: patient.id, label: `${patient.firstName} ${patient.lastName}`})
-                })
+                ))
                 set_patients(patientsArr)
             })
     }, [consultationId])
     const onSubmit = (body: any): void => {
         setSubmiting(true)
-        console.log(body)
         axios.put(`/consultations/${consultationId}`, body)
             .then(response => {
-                console.log(response)
                 if(response.status === 200){
                     localStorage.setItem('consultations', messages.updated)
                     navigate('/consultations')

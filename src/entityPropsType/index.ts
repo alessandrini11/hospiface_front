@@ -95,7 +95,7 @@ export type PersonnelType = {
     speciality: {
         id: number,
         name: string
-    },
+    } | null,
     consultations: number,
     phoneNumber: string,
     email: string,
