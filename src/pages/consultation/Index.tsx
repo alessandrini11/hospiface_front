@@ -31,9 +31,11 @@ const Index = (props: Props) => {
             .catch(error => {
                 set_error_message(error.message)
             })
-        if(localStorage.getItem('consultations')){
-            set_created_message(localStorage.getItem('consultations'))
-        }
+            .finally(() => {
+                if(localStorage.getItem('consultations')){
+                    set_created_message(localStorage.getItem('consultations'))
+                }
+            })
         return () => {
             localStorage.removeItem('consultations')
         }

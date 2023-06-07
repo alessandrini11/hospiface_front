@@ -123,11 +123,7 @@ export type ConsultationType = {
         interpretation: string,
         medical_order: {
             id: number,
-            drugs: {
-                id: number,
-                name: string,
-                dosage: string,
-            }[]
+            drugs: DrugType[]
         },
         medical_exams: {
             id: number,
@@ -148,9 +144,10 @@ export type ConsultationType = {
 }
 
 export type DrugType = {
-    id: string,
+    id: number,
     name: string,
-    dosage: string
+    dosage: string,
+    days: number
 }
 
 export type AppointmentType = {

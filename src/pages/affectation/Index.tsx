@@ -81,7 +81,7 @@ const Index = (props: Props) => {
     <div className="flex justify-content-center">
         <Spinner></Spinner>
     </div> :
-    <AffectationTable newUrl={URLS.affectations.new} handle_click={handle_click} pagination={pagination} columns={affectation_columns} entities={affectations} page={page} />
+    <AffectationTable newUrl={URLS.affectations.new} handle_click={handle_click} pagination={pagination} columns={affectation_columns} entities={affectations} page="affectations" />
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}

@@ -7,9 +7,6 @@ import Spinner from '../../components/Ui/Spinner'
 import HospitalisationTable from '../../components/HospitalisationTable'
 import { hospitalisation_columns, messages } from '../../utils/constants'
 import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
 import URLS from '../../utils/app_urls'
 
 type Props = {}
@@ -78,7 +75,7 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <HospitalisationTable newUrl={URLS.hospitalisations.new} handle_click={handle_click} pagination={pagination} columns={hospitalisation_columns} entities={hospitalisations} page={page} />
+    <HospitalisationTable newUrl={URLS.hospitalisations.new} handle_click={handle_click} pagination={pagination} columns={hospitalisation_columns} entities={hospitalisations} page="hospitalisations" />
 
     return (
         <>

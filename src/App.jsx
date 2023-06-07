@@ -10,7 +10,6 @@ function App() {
       <Routes>
         <Route element={<Custom />} path="/custom"></Route>
         <Route path="/login" element={<Login />} />
-
         <Route element={<ProtectedRoute />}>
         <Route path="/*" element={<DashboardRoutes  />} />
         </Route>

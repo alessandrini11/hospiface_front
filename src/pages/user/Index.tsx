@@ -75,7 +75,7 @@ const Index = () => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <UserTable newUrl={URLS.users.new} handle_click={handle_click} pagination={pagination} columns={user_columns} entities={users} page={page} />
+    <UserTable newUrl={URLS.users.new} handle_click={handle_click} pagination={pagination} columns={user_columns} entities={users} page="users" />
     return (
         <>
             {created_message && <Alert type="toast" icon="success" title="" message={created_message} />}

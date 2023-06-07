@@ -78,7 +78,7 @@ const Index = (props: Props) => {
     <div className="flex justify-center">
         <Spinner></Spinner>
     </div> :
-    <GardesTable newUrl={URLS.gardes.new} handle_click={handle_click} pagination={pagination} columns={garde_columns} entities={gardes} page={page} />
+    <GardesTable newUrl={URLS.gardes.new} handle_click={handle_click} pagination={pagination} columns={garde_columns} entities={gardes} page="gardes" />
 
     return (
         <>

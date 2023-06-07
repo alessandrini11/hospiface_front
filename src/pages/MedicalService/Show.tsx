@@ -69,34 +69,40 @@ const Show = (props: Props) => {
     return (
         <>
             {error_message && <Alert type="modal" icon="error" title={error_message} />}
-            {service ? <div className="">
-                <div className="">
-                    <h1 className="text-4xl font-bold underline">{service.name}</h1>
-                    <h2>Personnel</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Poste</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            {service ? 
+            <div className="card">
+                <div className="card-header">
+                    <h4 className="card-title mb-0 flex-grow-1">Personnel du Service {service.name}</h4>
+                </div>
+                <div className="card-body">
+                    <div className="table-responsive table-card">
+                        <table className="table table-nowrap">
+                            <thead className="text-muted table-light">
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Poste</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             {
                                 service.personnel_service.map((personnel_service, index) => (
                                     <tr key={index}>
                                         <td>{personnel_service.personnel.title} {personnel_service.personnel.firstName} {personnel_service.personnel.lastName}</td>
                                         <td>{personnel_service.positionHeld}</td>
                                         <td>
-                                            <span onClick={() => delete_personnel_service(personnel_service.id)} className="text-red-500 transition-all hover:scale-150 block cursor-pointer text-center"><FontAwesomeIcon icon={faTrash} /></span>
+                                            <span onClick={() => delete_personnel_service(personnel_service.id)} className="text-danger"><FontAwesomeIcon icon={faTrash} /></span>
                                         </td>
                                     </tr>
                                 ))
                             }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>: null}
+            </div>
+            
+           : null}
         </>
     )
 }
