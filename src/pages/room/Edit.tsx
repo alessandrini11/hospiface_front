@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import RoomModel from '../../model/Room.model';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../config/axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { messages } from '../../utils/constants';

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Pagination, PersonnelServiceType } from '../../entityPropsType'
-import axios from 'axios'
+import axios from '../../config/axios'
 import Swal from 'sweetalert2'
 import { affectation_columns, messages } from '../../utils/constants'
 import Spinner from '../../components/Ui/Spinner'
 import AffectationTable from '../../components/AffectationTable'
 import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
 import URLS from '../../utils/app_urls'
 
 type Props = {}

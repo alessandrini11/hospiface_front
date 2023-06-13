@@ -6,7 +6,7 @@ import ReactSelect from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
+import axios from '../../config/axios'
 import { messages, 
     consultation_status, 
     consultation_type

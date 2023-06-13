@@ -1,24 +1,19 @@
-import React from "react"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
-import useAuth from "../routes/useAuth"
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Add interface to play with roles if role needs to be checked
-|--------------------------------------------------------------------------
-|
-| interface Props {
-|	  allowedRoles: string[]
-| }
-|
-*/
-
+type loggedUser = {
+	firstname: string,
+	lastname: string,
+	email: string,
+	roles: string[]
+}
 const ProtectedRoute: React.FC = () => {
-	const { user, isLoading } = useAuth()
-	const location = useLocation()
-
+	const user = useState<loggedUser | null>(null)
+	const token = localStorage.getItem("token")
+	if(!token){
+		return <Navigate to="/login"></Navigate>
+	}
 	return <Outlet />
 }
 

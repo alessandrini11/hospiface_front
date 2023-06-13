@@ -8,7 +8,7 @@ import Select from 'react-select'
 import SubmitButton from '../../components/Ui/SubmitButton';
 import Input from '../../components/Ui/Input';
 import { appointment_status, messages } from '../../utils/constants';
-import axios from 'axios';
+import axios from '../../config/axios';
 import { Patient, PersonnelType } from '../../entityPropsType';
 type Props = {}
 

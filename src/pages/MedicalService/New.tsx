@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import MedicalServiceModel from '../../model/MedicalService.model';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { PersonnelType } from '../../entityPropsType';
+import axios from '../../config/axios';
 import { messages } from '../../utils/constants';
 import Input from '../../components/Ui/Input';
 import SubmitButton from '../../components/Ui/SubmitButton';

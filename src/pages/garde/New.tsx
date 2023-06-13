@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import GardeModel from '../../model/Garde.model'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../config/axios';
 import { garde_status, messages } from '../../utils/constants';
 import Alert from '../../components/Alert';
 import Input from '../../components/Ui/Input';

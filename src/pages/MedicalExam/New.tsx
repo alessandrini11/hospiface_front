@@ -5,7 +5,7 @@ import { medical_exam } from '../../utils/constants';
 import Select from 'react-select'
 import Alert from '../../components/Alert';
 import Input from '../../components/Ui/Input';
-import axios from 'axios';
+import axios from '../../config/axios';
 import MedicalExam from '../../model/MedicalExam';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MedicalExamType } from '../../entityPropsType';

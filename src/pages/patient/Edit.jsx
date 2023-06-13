@@ -8,7 +8,7 @@ import PatientModel from '../../model/Patient.model'
 import Alert from '../../components/Alert';
 import { blood_groups, messages, patient_status, sexs } from '../../utils/constants';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../config/axios';
 
 const Edit = () => {
     const { register, handleSubmit, control, reset, formState:{ errors,  } } = useForm({

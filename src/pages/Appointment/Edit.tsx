@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AppointmentType, Patient, PersonnelType } from '../../entityPropsType';
 import AppointmentModel from '../../model/Appointment.model';
 import { Controller, useForm } from 'react-hook-form';
-import axios from 'axios';
+import axios from '../../config/axios';
 import Alert from '../../components/Alert';
 import { appointment_status, messages } from '../../utils/constants';
 import Select from 'react-select'

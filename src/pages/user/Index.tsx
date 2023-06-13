@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Pagination, createdUpdatedBy } from '../../entityPropsType'
-import axios from 'axios'
+import axios from '../../config/axios'
 import Swal from 'sweetalert2'
 import Spinner from '../../components/Ui/Spinner'
 import Alert from '../../components/Alert'
-import CardContainer from '../../components/Cards/CardContainer'
 import UserTable from '../../components/UserTable'
 import {messages, user_columns} from '../../utils/constants'
-import SearchForm from '../../components/SearchForm'
-import AddButton from '../../components/Ui/AddButton'
 import URLS from '../../utils/app_urls'
 const Index = () => {
     const [search_params, set_search_params] = useSearchParams()

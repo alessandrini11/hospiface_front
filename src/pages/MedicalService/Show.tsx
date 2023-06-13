@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ServiceType } from '../../entityPropsType'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../config/axios'
 import Alert from '../../components/Alert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'

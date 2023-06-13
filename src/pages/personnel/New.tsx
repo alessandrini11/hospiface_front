@@ -7,7 +7,7 @@ import SubmitButton from '../../components/Ui/SubmitButton'
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import PersonnelModel from '../../model/Personnel.model'
-import axios from 'axios'
+import axios from '../../config/axios'
 import { messages, 
     personnel_position, 
     personnel_subType, 

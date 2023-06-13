@@ -4,7 +4,7 @@ import {ConsultationType, Pagination} from '../../entityPropsType/index'
 import Spinner from '../../components/Ui/Spinner'
 import { messages, consultation_columns } from '../../utils/constants'
 import { useSearchParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../config/axios'
 import Swal from 'sweetalert2'
 import ConsultationTable from '../../components/ConsultationTable'
 import URLS from '../../utils/app_urls'
@@ -20,6 +20,12 @@ const Index = (props: Props) => {
     const [query, setQuery] = useState(search_params.get('query'))
 
     useEffect(() => {
+        get_consultations()
+        return () => {
+            localStorage.removeItem('consultations')
+        }
+    }, [page, query])
+    const get_consultations = () => {
         axios.get(`/consultations?actualPage=${page || 1}&query=${query || ''}`)
             .then(response => {
                 set_personnel(response.data.data.data)
@@ -36,11 +42,7 @@ const Index = (props: Props) => {
                     set_created_message(localStorage.getItem('consultations'))
                 }
             })
-        return () => {
-            localStorage.removeItem('consultations')
-        }
-    }, [page, query])
-
+    }
     const handle_click = (id: number): void => {
         Swal.fire({
             title: 'Voulez vous supprimer ?',
@@ -61,7 +63,7 @@ const Index = (props: Props) => {
                         .then(result => {
                             if(result.isConfirmed){
                                 localStorage.setItem('personnel', messages.deleted)
-                                window.location.href = "/personnels"
+                                get_consultations()
                             }
                         })
                     })
@@ -74,7 +76,7 @@ const Index = (props: Props) => {
         })
     }
     const data = !personnel ?
-    <div className="flex justify-center">
+    <div style={{height: '70vh'}} className="d-flex align-items-center justify-content-center">
         <Spinner></Spinner>
     </div> :
     <ConsultationTable newUrl={URLS.consultations.new} handle_click={handle_click} pagination={pagination} columns={consultation_columns} entities={personnel} page="consultations" />

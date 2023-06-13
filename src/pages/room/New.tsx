@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import RoomModel from '../../model/Room.model'
-import axios from 'axios'
+import axios from '../../config/axios'
 import {messages} from '../../utils/constants'
 import Alert from '../../components/Alert'
 import Input from '../../components/Ui/Input'

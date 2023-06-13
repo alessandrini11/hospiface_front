@@ -5,7 +5,7 @@ import PersonnelTable from '../../components/PersonnelTable'
 import Spinner from '../../components/Ui/Spinner'
 import { messages, personnel_columns } from '../../utils/constants'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../config/axios'
 import Swal from 'sweetalert2'
 import URLS from '../../utils/app_urls'
 type Props = {}

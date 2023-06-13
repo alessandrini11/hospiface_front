@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ConsultationType } from '../../entityPropsType'
-import axios from 'axios'
+import axios from '../../config/axios'
 import { Link, useParams } from 'react-router-dom'
 import Alert from '../../components/Alert'
 import Spinner from '../../components/Ui/Spinner'
-import { consultation_status, messages } from '../../utils/constants'
+import { messages } from '../../utils/constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCross, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {}
 

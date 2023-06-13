@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { PersonnelType } from '../../entityPropsType';
-import axios from 'axios';
+import axios from '../../config/axios';
 import { messages, position_held } from '../../utils/constants';
 import Alert from '../../components/Alert';
 import Select from 'react-select'

@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select'
 import UserModel from '../../model/User.model';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../config/axios';
 import { messages, personnel_status, sexs, users_roles } from '../../utils/constants';
 import Alert from '../../components/Alert';
 import Input from '../../components/Ui/Input'
