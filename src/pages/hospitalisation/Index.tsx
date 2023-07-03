@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { HospitalizationType, Pagination } from '../../entityPropsType'
-import axios from 'axios'
+import axios from '../../config/axios'
 import Swal from 'sweetalert2'
 import Spinner from '../../components/Ui/Spinner'
 import HospitalisationTable from '../../components/HospitalisationTable'

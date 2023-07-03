@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
@@ -25,11 +25,16 @@ const Login = (props: Props) => {
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [submiting, setSubmiting] = useState<boolean>(false)
     const [is_open, set_is_open] = useState<boolean>(false)
+    useEffect(() =>{
+        if(localStorage.getItem('token')){
+            window.location.href ='/'
+        }
+    }, [])
+    
     const onSubmit = (body: any): void => {
         axios.post('/auth/login_check', body)
             .then(response => {
                 if(response.status === 200){
-                    console.log("executes")
                     localStorage.setItem('token', response.data.token)
                     localStorage.setItem('refresh_token', response.data.refresh_token)
                     window.location.href ='/'

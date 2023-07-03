@@ -16,6 +16,9 @@ const Show = (props: Props) => {
     useEffect(() => {
         get_garde(gardeId)
     }, [gardeId])
+    const handle_click = (): void => {
+        axios.get(`/generate_pdf/garde/${gardeId}`)
+    }
     const get_garde = (id: string | undefined) => {
         axios.get(`/gardes/${gardeId}`)
             .then(response => {
@@ -74,7 +77,10 @@ const Show = (props: Props) => {
                     <h2>Date de début: <span>{garde && new Date(garde.startDate).toDateString()}</span></h2>
                     <h2>Date de fin: <span>{garde && new Date(garde.endDate).toDateString()}</span></h2>
                     <h4 className="card-title mb-0 flex-grow-1">Gardes</h4>
-                    <div className="d-flex justify-content-end mt-3">
+                    <div className="d-flex justify-content-between mt-3">
+                        <a target="_blank" href={`https://localhost:8000/api/generate_pdf/garde/${gardeId}`} title="imprimer la liste" type="button" className="btn btn-soft-info btn-sm">
+                            <i className="bx bx-file"></i>
+                        </a>
                         <Link to={`/personnel_garde/new/${gardeId}`} className="btn btn-soft-success btn-sm">
                             <i className=" bx bx-plus-circle inline"></i>ajouter personnel
                         </Link>

@@ -195,8 +195,7 @@ export default class Home extends Component {
                                 <div className="d-flex align-items-lg-center flex-lg-row flex-column">
                                     <div className="flex-grow-1">
                                         <h4 className="fs-16 mb-1">Bojour, {`${this.state.currentUser?.firstname} ${this.state.currentUser?.lastname}`}</h4>
-                                        <p className="text-muted mb-0">Here's what's happening with your store
-                                            today.</p>
+                                        <p className="text-muted mb-0">Quoi de neuf aujour'hui? </p>
                                     </div>
                                 </div>
                             </div>

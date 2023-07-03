@@ -29,7 +29,7 @@ const Edit = (props: Props) => {
         setSubmiting(true)
         axios.put(`/rooms/${roomId}`, body)
             .then(response => {
-                if(response.status === 201){
+                if(response.status === 200){
                     localStorage.setItem('rooms', messages.updated)
                     navigate('/chambres')
                 }
